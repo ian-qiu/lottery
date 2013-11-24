@@ -40,4 +40,4 @@ function update_data($url){
     }
 }
 
-update_data($url);
+update_data(Shishicai::URL);
