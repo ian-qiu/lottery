@@ -20,8 +20,8 @@ $smarty_options = array(
     'compile_dir' => ROOT_DIR . 'website/compile',
 );
 $s = new Smarty();
-foreach ($smarty_options as $k => $v){
-    $s->$k = $v;
+foreach ($smarty_options as $option => $v){
+    $s->$option = $v;
 }
 
 $s->assign('JsonData',$json);
