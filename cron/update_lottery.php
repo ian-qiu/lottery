@@ -23,8 +23,8 @@ function get_data($html){
 }
 
 function update_data($url){
-    $minute = date('m');
-    while(date('m') === $minute){
+    $minute = date('i');
+    while(date('i') === $minute){
         $html = get_html($url);
         $data = get_data($html);
         $item_date = $data['i'];
