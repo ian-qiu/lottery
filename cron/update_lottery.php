@@ -1,4 +1,3 @@
-#!/bin/env php
 <?php
 include '../config/global.php';
 set_time_limit(0);
@@ -29,6 +28,7 @@ function update_data($url){
         $data = get_data($html);
         $item_date = $data['i'];
         $item_code = $data['b'];
+        print_r($data);exit;
         if(!empty($item_date) && !empty($item_code) && preg_match('/^\d{5}$/',$item_code) > 0){
             $sql = 'insert into shishicai(item_date,item_code)values("%s","%s") on duplicate key update item_code=values(update_code)';
             $sql = sprintf($sql,$item_date,$item_code);
