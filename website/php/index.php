@@ -1,6 +1,6 @@
 <?php
 
-include '../../config/global.php';
+include dirname(__FILE__) . '../../config/global.php';
 include ROOT_DIR . 'db/lottery_db_helper.php';
 
 include_once(ROOT_DIR . 'libs/Smarty-3.1.15/libs/Smarty.class.php');
