@@ -68,6 +68,10 @@
                     }
                     html += '</tr>';
                 }
+                html += '<tr><td></td><td></td>';
+                for(var i in all){
+                    html += '<td>' +i+'</td>';
+                }
                 html += '</table>';
                 $("#main").html(html);
             }
