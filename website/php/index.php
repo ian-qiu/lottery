@@ -6,7 +6,7 @@ include ROOT_DIR . 'db/lottery_db_helper.php';
 inlcude_once(ROOT_DIR . 'libs/Smarty-3.1.15/libs/Smarty.class.php');
 
 $db = new LotteryDBHelper();
-$sql = 'select * from lottery order by item_date desc limit 200';
+$sql = 'select * from shishicai order by item_date desc limit 200';
 $data = $db->getAll($sql);
 foreach ($data as $v){
     $json[$v['item_date']] = $v['item_code'];

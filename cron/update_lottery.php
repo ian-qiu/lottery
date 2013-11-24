@@ -3,6 +3,7 @@
 include '../config/global.php';
 set_time_limit(0);
 @ini_set('memory_limit', '128M');
+@ini_set('display_erros','On');
 include ROOT_DIR . 'db/lottery_db_helper.php';
 function get_html($url){
     $ch = curl_init($url);
@@ -29,7 +30,7 @@ function update_data($url){
         $item_date = $data['i'];
         $item_code = $data['b'];
         if(!empty($item_date) && !empty($item_code) && preg_match('/^\d{5}$/',$item_code) > 0){
-            $sql = 'insert into lottery(item_date,item_code)values("%s","%s") on duplicate key update item_code=values(update_code)';
+            $sql = 'insert into shishicai(item_date,item_code)values("%s","%s") on duplicate key update item_code=values(update_code)';
             $sql = sprintf($sql,$item_date,$item_code);
             $db = new LotteryDBHelper();
             $db->update($sql);
