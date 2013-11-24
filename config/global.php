@@ -2,7 +2,7 @@
 
 define('ROOT_DIR', dirname(__FILE__) . '/../');
 date_default_timezone_set('Asia/Shanghai');
-@ini_set('error_log',ROOT_DIR . 'log/php_errors.log');
+@ini_set('error_log','/tmp/php_errors.log');
 
 class Shishicai{
     const URL = 'http://www.shishicai.cn/cqssc/touzhu/';
