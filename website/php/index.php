@@ -1,9 +1,9 @@
 <?php
 
-include '../config/global.php';
+include '../../config/global.php';
 include ROOT_DIR . 'db/lottery_db_helper.php';
 
-inlcude_once(ROOT_DIR . 'libs/Smarty-3.1.15/libs/Smarty.class.php');
+include_once(ROOT_DIR . 'libs/Smarty-3.1.15/libs/Smarty.class.php');
 
 $db = new LotteryDBHelper();
 $sql = 'select * from shishicai order by item_date desc limit 200';
