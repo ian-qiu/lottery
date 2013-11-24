@@ -1,6 +1,6 @@
 #!/bin/env php
 <?php
-include '../config/global.php';
+include dirname(__FILE__) . '/../config/global.php';
 set_time_limit(0);
 @ini_set('memory_limit', '128M');
 @ini_set('display_erros','On');
