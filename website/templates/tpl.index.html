@@ -91,7 +91,7 @@
             function get_recent_items($textarea){
                 $.get('/api.php?action=get_recent_items',{},function(ret){
                     $textarea.val(ret);
-                },'json');
+                },'text');
             }
 
             $(function(){
