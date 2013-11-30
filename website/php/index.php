@@ -6,7 +6,7 @@ include ROOT_DIR . 'db/lottery_db_helper.php';
 include_once(ROOT_DIR . 'libs/Smarty-3.1.15/libs/Smarty.class.php');
 
 $db = new LotteryDBHelper();
-$sql = 'select * from shishicai order by item_date desc limit 500';
+$sql = 'select * from shishicai order by item_date desc limit 801';
 $data = $db->getAll($sql);
 $data = array_reverse($data);
 foreach ($data as $v){
