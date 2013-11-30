@@ -100,9 +100,9 @@
                     var type = parseInt($(this).attr("data-type"));
                     compare(type);
                 });
-                get_recent_items($("#last-items-text"));
-                $("#last-items").click(function(){
-                    get_recent_items($("#last-items-text"));
+                get_recent_items($("#recent-items-text"));
+                $("#recent-items").click(function(){
+                    get_recent_items($("#recent-items-text"));
                 });
             });
         </script>
@@ -121,8 +121,8 @@
                 <button class="change" data-type="1">前3</button>
             </div>
             <div>
-                <button id="last-items">最近三百期</button>
-                <textarea id="last-item-text">
+                <button id="recent-items">最近三百期</button>
+                <textarea id="recent-items-text">
                 </textarea>
             </div>
         </div>
