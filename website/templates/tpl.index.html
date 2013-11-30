@@ -52,8 +52,9 @@
                     html += '<th style="width:2%;min-width:34px;max-width:50px;">' +i+'</th>';
                 }
                 html += '</tr>';
-                var index = 1;
+                var index = 0;
                 for(var i in a){
+                    index++;
                     if(index <= 301){
                         continue;
                     }
@@ -70,7 +71,7 @@
                           break;
                     }
                     html += '<tr>';
-                    html += '<td>' + index++ + '</td>';
+                    html += '<td>' + index + '</td>';
                     html += '<td>' + i + '</td>';
                     html += '<td>' + v + '</td>';
                     for(var j in all){
