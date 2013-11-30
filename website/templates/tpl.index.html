@@ -11,6 +11,11 @@
             #ret-table{
                 text-align: center;
             }
+            th.hti-column {
+                width:2%;
+                min-width:34px;
+                max-width:50px;
+            }
             td.hit{
                 background-color:#2EAC6A;
                 text-align: center;
@@ -49,13 +54,13 @@
                 var html = '<table class="table table-bordered">';
                 html += '<tr><th style="width:3%;">编号</th><th style="width:8%;"></th><th style="width:4%;"></th>';
                 for(var i in all){
-                    html += '<th style="width:2%;min-width:34px;max-width:50px;">' +i+'</th>';
+                    html += '<th class="hit-column">' +i+'</th>';
                 }
-                html += '</tr>';
+                html += '<th clas="hit-column">近三百期</th></tr>';
                 var index = 0;
+                var skip = 301;
                 for(var i in a){
-                    index++;
-                    if(index <= 301){
+                    if(--skip > 0){
                         continue;
                     }
                     var v = a [i];
@@ -71,18 +76,20 @@
                           break;
                     }
                     html += '<tr>';
-                    html += '<td>' + index + '</td>';
+                    html += '<td>' + (++index) + '</td>';
                     html += '<td>' + i + '</td>';
                     html += '<td>' + v + '</td>';
                     for(var j in all){
                         html += isHit(v1,all[j]);
                     }
+                    html += isHit(v1,a.slice(index-1,300));
                     html += '</tr>';
                 }
                 html += '<tr><td>编号</td><td></td><td></td>';
                 for(var i in all){
                     html += '<td>' +i+'</td>';
                 }
+                html += '<td>近三百期</td></tr>';
                 html += '</table>';
                 $("#main").html(html);
             }
