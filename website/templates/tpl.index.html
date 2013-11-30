@@ -89,7 +89,7 @@
             }
             
             function get_recent_items($textarea){
-                $.get('/api.php?action=get_recent_items',function(ret){
+                $.get('/api.php?action=get_recent_items',{},function(ret){
                     $textarea.val(ret);
                 },'json');
             }
@@ -122,8 +122,7 @@
             </div>
             <div>
                 <button id="recent-items">最近三百期</button>
-                <textarea id="recent-items-text">
-                </textarea>
+                <textarea id="recent-items-text"></textarea>
             </div>
         </div>
     </body>
