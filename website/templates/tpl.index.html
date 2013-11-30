@@ -42,11 +42,12 @@
             };
             function compare(type){
                 var html = '<table class="table table-bordered">';
-                html += '<tr><th style="width:8%;"></th><th style="width:4%;"></th>';
+                html += '<tr><th>编号</th><th style="width:8%;"></th><th style="width:4%;"></th>';
                 for(var i in all){
                     html += '<th style="width:2%;">' +i+'</th>';
                 }
                 html += '</tr>';
+                var index = 1;
                 for(var i in a){
                     var v = a [i];
                     switch(type){
@@ -61,6 +62,7 @@
                           break;
                     }
                     html += '<tr>';
+                    html += '<td>' + index++ + '</td>';
                     html += '<td>' + i + '</td>';
                     html += '<td>' + v + '</td>';
                     for(var j in all){
@@ -68,7 +70,7 @@
                     }
                     html += '</tr>';
                 }
-                html += '<tr><td></td><td></td>';
+                html += '<tr><td>编号</td><td></td><td></td>';
                 for(var i in all){
                     html += '<td>' +i+'</td>';
                 }
