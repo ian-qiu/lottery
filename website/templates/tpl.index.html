@@ -92,6 +92,7 @@
             }
             
             function get_recent_items($textarea){
+                $textarea.val('获取中...');
                 $.get('/api.php?action=get_recent_items',{},function(ret){
                     $textarea.val(ret);
                 },'text');
