@@ -54,6 +54,9 @@
                 html += '</tr>';
                 var index = 1;
                 for(var i in a){
+                    if(i <= 300){
+                        continue;
+                    }
                     var v = a [i];
                     switch(type){
                         case 1:
