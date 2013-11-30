@@ -14,6 +14,11 @@ function get_html($url){
     return $ret;
 }
 
+/**
+ * 从抓取到的html中读取中奖记录
+ * @param string $html
+ * @return obj
+ */
 function get_data($html){
     preg_match('/aryIssue=(.*?);/',$html,$matches);
     $str = $matches[1];
