@@ -87,6 +87,12 @@
                     return '<td class="nothit" style="background-color:red;"><span><挂></span></td>';
                 }
             }
+            
+            function get_recent_items($textarea){
+                $.get('/api.php?action=get_recent_items',function(ret){
+                    $textarea.val(ret);
+                },'json');
+            }
 
             $(function(){
                 compare(3);
@@ -94,6 +100,10 @@
                     var type = parseInt($(this).attr("data-type"));
                     compare(type);
                 });
+                get_recent_items($("last-items-text"));
+                $("#last-items").click(){
+                    get_recent_items($("last-items-text"));
+                }
             });
         </script>
     </head>
@@ -106,14 +116,14 @@
             </div>
             <div id="main"></div>
             <div>
-                <ul>
-                    <li>最近三百期</li>
-                </ul>
-            </div>
-            <div>
                 <button style="margin-left: 20%;" class="change" data-type="3">后3</button>
                 <button class="change" data-type="2">中3</button>
                 <button class="change" data-type="1">前3</button>
+            </div>
+            <div>
+                <button id="last-items">最近三百期</button>
+                <textarea id="last-item-text">
+                </textarea>
             </div>
         </div>
     </body>
