@@ -21,6 +21,7 @@
                 text-align: center;
             }
             td.nothit{
+                background-color:red;
                 text-align: center;
             }
             #recent-items-text {
@@ -82,9 +83,9 @@
                     html += '<td>' + i + '</td>';
                     html += '<td>' + v + '</td>';
                     for(var j in all){
-                        html += isHit(v1,all[j]);
+                        html += isHit(v1,all[j],false);
                     }
-                    html += isHit(v1,code_arr.slice(index-1,index + 299));
+                    html += isHit(v1,code_arr.slice(index-1,index + 299),true);
                     html += '</tr>';
                 }
                 html += '<tr><td>编号</td><td></td><td></td>';
@@ -96,11 +97,15 @@
                 $("#main").html(html);
             }
 
-            function isHit(v,arr){
-                if($.inArray(v,arr) > -1){
+            function isHit(v,arr,opposite){
+                var hit = $.inArray(v,arr) > -1;
+                if(opposite){
+                    hit = !hit;
+                }
+                if(hit){
                     return '<td class="hit"><span><中></span></td>';
                 }else{
-                    return '<td class="nothit" style="background-color:red;"><span><挂></span></td>';
+                    return '<td class="nothit"><span><挂></span></td>';
                 }
             }
             
