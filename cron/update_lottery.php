@@ -4,8 +4,7 @@ include dirname(__FILE__) . '/../config/global.php';
 set_time_limit(0);
 @ini_set('memory_limit', '128M');
 @ini_set('display_erros','On');
-include_once ROOT_DIR . 'db/lottery_db_helper.php';
-include_once ROOT_DIR . 'lib/LotteryUtils.php';
+include ROOT_DIR . 'db/lottery_db_helper.php';
 function get_html($url){
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_HTTPGET, true);
@@ -40,7 +39,6 @@ function update_data($url){
             $sql = sprintf($sql,$item_date,$item_code);
             $db = new LotteryDBHelper();
             $db->update($sql);
-            $util = new LotteryUtil
         }else{
             file_put_contents(ROOT_DIR . 'log/update_lottery.log',  date('[Y-m-d H:i:s]') . "\t" . "failed to update!");
         }
