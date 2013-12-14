@@ -22,7 +22,7 @@ class LotteryDBHelper{
         $ret = array();
         while($row = mysql_fetch_assoc($result)){
             if($assoc){
-                $ret[$assoc] = $row;
+                $ret[$row[$assoc]] = $row;
             }else{
                 $ret[] = $row;
             }
