@@ -63,7 +63,7 @@
                 var code_arr = [];
                 for(var item_date in a.codes){
                     var item_code = a .codes[item_date].item_code;
-                    var last_300_codes = a.code[item_date].last_300_codes;
+                    var last_300_codes = a.codes[item_date].last_300_codes;
                     var v1 = getCode(item_code,type);
                     code_arr.push(v1);
                     if(--skip > 0){
