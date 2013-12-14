@@ -8,7 +8,7 @@
 class LotteryUtil{
     
     public function getRecentIssues($item_date,$num){
-        $dir = ROOT_DIR . 'log/recent/issues/';
+        $dir = ROOT_DIR . 'log/issues/';
         $file = $dir . $item_date . '.txt';
         if(is_file($file)){
             $codes = file_get_contents($file);
