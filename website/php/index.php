@@ -13,7 +13,7 @@ $codes = array_reverse($codes,true);
 
 $util = new LotteryUtil();
 foreach ($codes as $k => $v){
-    //$codes[$k]['last_300_codes'] = $util->getRecentIssues($v['item_date'], 300);
+    $codes[$k]['last_300_codes'] = $util->getRecentIssues($v['item_date'], 300);
 }
 $json = json_encode(array('codes' => $codes));
 
