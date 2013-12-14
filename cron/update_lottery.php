@@ -23,6 +23,11 @@ function get_data($html){
     preg_match('/aryIssue=(.*?);/',$html,$matches);
     $str = $matches[1];
     $arr = json_decode($str,true);
+    $sort = array();
+    foreach($arr as $tmp){
+        $sort[] = $tmp['i'];
+    }   
+    array_multisort($sort,SORT_ASC,SORT_STRING,$arr);
     $new = array_pop($arr);
     return $new;
 }

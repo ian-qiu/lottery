@@ -77,13 +77,14 @@
                         html += isHit(v1,all[j],false);
                     }
                     html += isHit(v1,code_arr.slice(index-1,index + 299),true);
-                    html += isHit(v1,(function(data,type){
+                    html += '<td></td>';
+                    /*html += isHit(v1,(function(data,type){
                         var tmp = [];
                         $.each(data,function(key.val){
                             tmp.push(getCode(val,type));
                         });
                         return tmp;
-                    })(last_300_codes,type),true);
+                    })(last_300_codes,type),true);*/
                     html += '</tr>';
                 }
                 html += '<tr><td>编号</td><td></td><td></td>';
@@ -95,7 +96,7 @@
                 $("#main").html(html);
             }
             
-            function getCode(code,type){
+            function getCode(item_code,type){
                 switch(type){
                     case 1:
                       var v1 = item_code.substr(0,3);
