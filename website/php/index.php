@@ -1,18 +1,21 @@
 <?php
 
 include dirname(__FILE__) . '/../../config/global.php';
-include ROOT_DIR . 'db/lottery_db_helper.php';
+include_once ROOT_DIR . 'db/lottery_db_helper.php';
+include_once ROOT_DIR . 'model/lottery_util.php';
 
 include_once(ROOT_DIR . 'libs/Smarty-3.1.15/libs/Smarty.class.php');
 
 $db = new LotteryDBHelper();
 $sql = 'select * from shishicai order by item_date desc limit 800';
-$data = $db->getAll($sql);
-$data = array_reverse($data);
-foreach ($data as $v){
-    $json[$v['item_date']] = $v['item_code'];
+$codes = $db->getAll($sql,'item_date');
+$codes = array_reverse($codes,true);
+
+$util = new LotteryUtil();
+foreach ($codes as $k => $v){
+    $codes['last_300_codes'] = $util->getRecentIssues($v['item_date'], 300);
 }
-$json = json_encode($json);
+$json = json_encode(array('codes' => $codes));
 
 $smarty_options = array(
     'left_delimiter' => '{{',
