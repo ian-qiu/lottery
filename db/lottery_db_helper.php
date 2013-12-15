@@ -33,6 +33,9 @@ class LotteryDBHelper{
     public function update($sql){
         $this->connect();
         $result = mysql_query($sql,$this->conn);
+        if($result === false){
+            error_log(mysql_error($this->conn));
+        }
         return $result;
     }
     
