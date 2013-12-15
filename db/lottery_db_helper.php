@@ -5,7 +5,7 @@ class LotteryDBHelper{
     private $conn;
     private function connect(){
         if(!$this->conn){
-            $this->conn = mysql_connect(DB::HOST, DB::USER, DB::PASSWD);
+            $this->conn = mysql_connect(DB::HOST, DB::USER, DB::PASSWD,true);
             mysql_select_db(self::DB,$this->conn);
         }
     }
