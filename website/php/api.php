@@ -43,7 +43,7 @@ class LotteryApi{
         $list = $util->getRecent300V2List($item_date);
         $ret = array();
         foreach($list as $v){
-            $ret[] = substr($v,2);
+            $ret[] = substr($v['item_code'],2);
         }
         $ret = implode(' ', array_unique($ret));
         echo $ret;
