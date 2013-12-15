@@ -37,6 +37,8 @@ function get_data($html){
 
 function update_data($url){
     $minute = date('i');
+    include_once ROOT_DIR . 'model/lottery_util.php';
+    $util = new LotteryUtil();
     while(date('i') === $minute){
         $html = get_html($url);
         $data = get_data($html);
@@ -45,9 +47,11 @@ function update_data($url){
         }
         $item_date = $data['i'];
         $item_code = $data['b'];
-        if(!empty($item_date) && !empty($item_code) && preg_match('/^\d{5}$/',$item_code) > 0){  
-            $sql = 'insert into shishicai(item_date,item_code)values("%s","%s") on duplicate key update item_code=values(item_code)';
-            $sql = sprintf($sql,$item_date,$item_code);
+        if(!empty($item_date) && !empty($item_code) && preg_match('/^\d{5}$/',$item_code) > 0){
+            $recent_300_v1 = $util->calRecent300V1($item_date, $item_code);
+            $recent_300_v2 = $util->calRecent300V2($item_date, $item_code);
+            $sql = 'insert into shishicai(item_date,item_code,recent_300_v1,recent_300_v2)values("%s","%s") on duplicate key update item_code=values(item_code),recent_300_v1=values(recent_300_v1),recent_300_v2=values(recent_300_v2)';
+            $sql = sprintf($sql,$item_date,$item_code,$recent_300_v1,$recent_300_v2);
             $db = new LotteryDBHelper();
             $db->update($sql);
         }else{
