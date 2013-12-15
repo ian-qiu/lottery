@@ -57,7 +57,7 @@
                 for(var i in all){
                     html += '<th class="hit-column">' +i+'</th>';
                 }
-                html += '<th class="hit-column">近三百期</th><th class="hit-column">近三百期2</th></tr>';
+                html += '<th class="hit-column">近三百期</th><th class="hit-column">近三百天</th></tr>';
                 var index = 0;
                 var skip = 301;
                 var code_arr = [];
@@ -91,7 +91,7 @@
                 for(var i in all){
                     html += '<td>' +i+'</td>';
                 }
-                html += '<td>近三百期</td><td>近三百期2</td></tr>';
+                html += '<td>近三百期</td><td>近三百天</td></tr>';
                 html += '</table>';
                 $("#main").html(html);
             }
@@ -124,7 +124,7 @@
             }
             
             function isHit2(v,type){
-                var hit = v.split("")[type-1] == "2";
+                var hit = v.split("")[type-1] == "1";
                 if(hit){
                     return '<td class="hit"><span><中></span></td>';
                 }else{
@@ -166,8 +166,16 @@
                 <button class="change" data-type="1">前3</button>
             </div>
             <div>
-                <button id="recent-items">最近三百期</button>
-                <textarea id="recent-items-text" cols="100" rows="15"></textarea>
+                <div style="display:inline-block;">
+                    <button id="recent-items">最近三百期</button>
+                    <br/>
+                    <textarea id="recent-items-text" cols="80" rows="15"></textarea>
+                </div>
+                <div style="display:inline-block;">
+                    <button id="recent-items2">最近三百期</button>
+                    <br/>
+                    <textarea id="recent-items-text2" cols="80" rows="15"></textarea>
+                </div>
             </div>
         </div>
     </body>
