@@ -23,6 +23,9 @@ function get_data($html){
     preg_match('/aryIssue=(.*?);/',$html,$matches);
     $str = $matches[1];
     $arr = json_decode($str,true);
+    if(!is_array($arr)){
+        return false;
+    }
     $sort = array();
     foreach($arr as $tmp){
         $sort[] = $tmp['i'];
@@ -37,6 +40,9 @@ function update_data($url){
     while(date('i') === $minute){
         $html = get_html($url);
         $data = get_data($html);
+        if(!$data){
+            continue;
+        }
         $item_date = $data['i'];
         $item_code = $data['b'];
         if(!empty($item_date) && !empty($item_code) && preg_match('/^\d{5}$/',$item_code) > 0){  

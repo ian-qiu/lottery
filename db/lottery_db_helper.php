@@ -6,7 +6,7 @@ class LotteryDBHelper{
     private function connect(){
         if(!$this->conn){
             $this->conn = mysql_connect(DB::HOST, DB::USER, DB::PASSWD);
-            mysql_select_db(self::DB);
+            mysql_select_db(self::DB,$this->conn);
         }
     }
     
@@ -32,7 +32,7 @@ class LotteryDBHelper{
     
     public function update($sql){
         $this->connect();
-        $result = mysql_query($sql);
+        $result = mysql_query($sql,$this->conn);
         return $result;
     }
     

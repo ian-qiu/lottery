@@ -1,5 +1,5 @@
 <?php
-include dirname(__FILE__) . '/config/global.php';
+include dirname(__FILE__) . '/../config/global.php';
 
 include_once ROOT_DIR . 'db/lottery_db_helper.php';
 
@@ -14,6 +14,7 @@ foreach ($data as $v){
     $item_code = $v['item_code'];
     $recent_300_v1 = $util->calRecent300V1($item_date, $item_code);
     $recent_300_v2 = $util->calRecent300V2($item_date, $item_code);
-    $sql = sprintf("update shishicai set recent_300_v1='%s',recent_300_v2='%s' where item_date='%s'",$recent_300_v1,$recent_300_v2,$item_date);
-    echo $sql;
+    $sql = sprintf("update shishicai set recent_300_v1='%s',recent_300_v2='%s' where item_date='%s';",$recent_300_v1,$recent_300_v2,$item_date);
+    $db->update($sql);
+    echo $sql . PHP_EOL;
 }
