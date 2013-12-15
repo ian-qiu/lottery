@@ -8,6 +8,10 @@
         <script type="text/javascript" src="http://libs.baidu.com/bootstrap/2.0.4/js/bootstrap.js"></script>
         <link href="http://libs.baidu.com/bootstrap/2.0.4/css/bootstrap.css" rel="stylesheet">
         <style type="text/css">
+            *{
+                margin:0px;
+                padding:0px;
+            }
             #ret-table{
                 text-align: center;
             }
@@ -132,9 +136,9 @@
                 }
             }
             
-            function get_recent_items($textarea){
+            function get_recent_items($textarea,action){
                 $textarea.val('获取中...');
-                $.get('/api.php?action=get_recent_items',{},function(ret){
+                $.get('/api.php?action=' + action,{},function(ret){
                     $textarea.val(ret);
                 },'text');
             }
@@ -145,9 +149,13 @@
                     var type = parseInt($(this).attr("data-type"));
                     compare(type);
                 });
-                get_recent_items($("#recent-items-text"));
+                get_recent_items($("#recent-items-text"),'get_recent_items');
                 $("#recent-items").click(function(){
-                    get_recent_items($("#recent-items-text"));
+                    get_recent_items($("#recent-items-text"),'get_recent_items');
+                });
+                get_recent_items($("#recent-items-text2"),'get_recent_items2');
+                $("#recent-items2").click(function(){
+                    get_recent_items($("#recent-items-text"),'get_recent_items2');
                 });
             });
         </script>

@@ -30,6 +30,12 @@ class LotteryDBHelper{
         return $ret;
     }
     
+    public function getOne($sql){
+        $this->connect();
+        $result = mysql_query($sql, $this->conn);
+        return mysql_fetch_assoc($result);
+    }
+    
     public function update($sql){
         $this->connect();
         $result = mysql_query($sql,$this->conn);

@@ -15,11 +15,16 @@ class LotteryUtil{
     }
     
     public function calRecent300V2($item_date,$item_code,$num = 300){
+        $data = $this->getRecent300V2List($item_date, $num);
+        return $this->getRecent300($data, $item_code);
+    }
+    
+    public function getRecent300V2List($item_date,$num = 300){
         $db = new LotteryDBHelper();
         list(,$issue) = explode('-',$item_date);
         $sql = sprintf('select * from shishicai where item_date < "%s" and item_date like "%%-%s" order by item_date desc limit %d',$item_date,$issue,$num);
         $data = $db->getAll($sql);
-        return $this->getRecent300($data, $item_code);
+        return $data;
     }
     
     private function getRecent300($data,$item_code,$num = 300){

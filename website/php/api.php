@@ -32,6 +32,23 @@ class LotteryApi{
         exit;
     }
     
+    private function get_recent_items2(){
+        $db = new LotteryDBHelper();
+        $sql = "select * from shishicai order by item_date desc limit 1;";
+        $data = $db->getOne($sql);
+        $item_date = $data['item_date'];
+        $item_code = $data['item_code'];
+        include_once ROOT_DIR . 'model/lottery_util.php';
+        $util = new LotteryUtil();
+        $list = $util->getRecent300V2List($item_date);
+        $ret = array();
+        foreach($list as $v){
+            $ret[] = substr($v,2);
+        }
+        $ret = implode(' ', array_unique($ret));
+        echo $ret;
+        exit;
+    }
 }
 
 $c = new LotteryApi();
