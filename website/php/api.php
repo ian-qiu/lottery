@@ -28,7 +28,7 @@ class LotteryApi{
             $ret[] = $tmp['item_code_tmp'];
         }
         $ret = array_unique($ret);
-        sort($ret,SORT_STRING);
+        //sort($ret,SORT_STRING);
         echo implode(',', $ret);
         exit;
     }
@@ -47,7 +47,7 @@ class LotteryApi{
             $ret[] = substr($v['item_code'],2);
         }
         $ret = array_unique($ret);
-        sort($ret,SORT_STRING);
+        //sort($ret,SORT_STRING);
         echo implode(',', $ret);
         exit;
     }
