@@ -56,7 +56,7 @@ class LotteryApi{
         $ret = array_unique($ret);
         //sort($ret,SORT_STRING);
         $json = array();
-        $json['item_date'] = $item_date;
+        $json['item_date'] = $item_date . '-近三百天';
         $json['codes'] = implode(',', $ret);
         echo json_encode($json);
         exit;
