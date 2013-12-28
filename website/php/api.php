@@ -29,7 +29,9 @@ class LotteryApi{
         }
         $ret = array_unique($ret);
         //sort($ret,SORT_STRING);
-        echo implode(',', $ret);
+        $json = array();
+        $json['codes'] = implode(',', $ret);
+        echo json_encode($json);
         exit;
     }
     
@@ -38,7 +40,12 @@ class LotteryApi{
         $sql = "select * from shishicai order by item_date desc limit 1;";
         $data = $db->getOne($sql);
         $item_date = $data['item_date'];
-        $item_code = $data['item_code'];
+        list($date,$issue) = explode('-',$item_date);
+        if($issue == '120'){
+            $item_date = date('Ymd',strtotime('tomorrow',strttotime($date))) . '-001';
+        }else{
+            $item_date = $date . '-' . sprintf('%03d',intval($issue) + 1);
+        }
         include_once ROOT_DIR . 'model/lottery_util.php';
         $util = new LotteryUtil();
         $list = $util->getRecent300V2List($item_date);
@@ -48,7 +55,10 @@ class LotteryApi{
         }
         $ret = array_unique($ret);
         //sort($ret,SORT_STRING);
-        echo implode(',', $ret);
+        $json = array();
+        $json['item_date'] = $item_date . '-近三百天';
+        $json['codes'] = implode(',', $ret);
+        echo json_encode($json);
         exit;
     }
 }
