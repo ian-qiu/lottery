@@ -1,12 +1,13 @@
 #!/bin/env php
 <?php
 include dirname(__FILE__) . '/../config/global.php';
-set_time_limit(0);
+set_time_limit(60);
 @ini_set('memory_limit', '128M');
 @ini_set('display_erros','On');
 include ROOT_DIR . 'db/lottery_db_helper.php';
 function get_html($url){
     $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 60);
     curl_setopt($ch, CURLOPT_HTTPGET, true);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $ret = curl_exec($ch);
