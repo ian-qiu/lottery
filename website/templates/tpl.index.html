@@ -64,7 +64,10 @@
                 for(var i in all){
                     html += '<th class="hit-column">' +i+'</th>';
                 }
-                html += '<th class="hit-column">近三百期</th><th class="hit-column">近三百天</th></tr>';
+                html += '<th class="hit-column">近三百期</th>'+
+                        '<th class="hit-column">近三百天</th>'+
+                        '<th class="hit-column">奇数期&近三百天</th>'+
+                        '</tr>';
                 var index = 0;
                 var skip = 301;
                 var code_arr = [];
@@ -98,7 +101,7 @@
                 for(var i in all){
                     html += '<td>' +i+'</td>';
                 }
-                html += '<td>近三百期</td><td>近三百天</td></tr>';
+                html += '<td>近三百期</td><td>奇数期&近三百天</td></tr>';
                 html += '</table>';
                 $("#main").html(html);
             }

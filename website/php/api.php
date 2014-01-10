@@ -4,7 +4,7 @@ include dirname(__FILE__) . '/../../config/global.php';
 include ROOT_DIR . 'db/lottery_db_helper.php';
 
 include_once(ROOT_DIR . 'libs/Smarty-3.1.15/libs/Smarty.class.php');
-
+//@ini_set("display_errors","On");
 class LotteryApi{
     
     public function dispatcher(){
@@ -42,7 +42,7 @@ class LotteryApi{
         $item_date = $data['item_date'];
         list($date,$issue) = explode('-',$item_date);
         if($issue == '120'){
-            $item_date = date('Ymd',strtotime('tomorrow',strttotime($date))) . '-001';
+            $item_date = date('Ymd',strtotime('tomorrow',strtotime(substr($date,0,8)))) . '-001';
         }else{
             $item_date = $date . '-' . sprintf('%03d',intval($issue) + 1);
         }
