@@ -20,7 +20,7 @@ function get_html($url){
  * @param string $html
  * @return obj
  */
-function get_data($html){
+function get_data2($html){
     preg_match('/aryIssue=(.*?);/',$html,$matches);
     $str = $matches[1];
     $arr = json_decode($str,true);
@@ -34,6 +34,27 @@ function get_data($html){
     array_multisort($sort,SORT_ASC,SORT_STRING,$arr);
     $new = array_pop($arr);
     return $new;
+}
+
+function get_data($html){
+    $arr = json_decode($html,true);
+    if(is_array($arr) && isset($arr['successful']) && $arr['successful']){
+        $items = $arr['latestPeriods'];
+        $ret = array();
+        foreach ($items as $tmp){
+            $issue = $tmp['period'];
+            $item_date = '20' . substr($issue,0,6) . '-' .substr($issue,6);
+            $item_code = preg_replace('/\s+/', '', $tmp['number']);
+            $ret[$item_date] = array(
+                'i' => $item_date,
+                'b' => $item_code
+            );
+        }
+        ksort($ret);
+        return array_pop($ret);
+    }else{
+        return false;
+    }
 }
 
 function update_data($url){
@@ -62,4 +83,6 @@ function update_data($url){
     }
 }
 
-update_data(Shishicai::URL);
+//update_data(Shishicai::URL);
+
+update_data('http://caipiao.163.com/order/preBet_resentAwardNum.html?gameEn=ssc');
