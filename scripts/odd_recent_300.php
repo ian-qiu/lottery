@@ -19,17 +19,18 @@ $sql = "select * from shishicai order by item_date desc limit 1200;";
 $data = $db->getAll($sql);
 
 foreach ($data as $tmp){
+    $code = $tmp['item_code'];
     $item_date = $tmp['item_date'];
     $tmp = $util->getRecent300V2List($item_date);
     $ret = '';
     for($start = 0;$start<3;$start++){
-        $item_code = substr($code,$start);
+        $item_code = substr($code,$start,3);
         $recent_300 = array();
         foreach ($tmp as $v) {
-            $recent_300[] = substr($v['item_code'],$start);
+            $recent_300[] = substr($v['item_code'],$start,3);
         }
         $recent_300 = array_unique($recent_300);
-        $end = array_diff($recent_300, $odd_list);
+        $end = array_diff($odd_list,$recent_300);
         if(in_array($item_code,$end)){
             $ret .= '1';
         }else{
