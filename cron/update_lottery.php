@@ -84,5 +84,7 @@ function update_data($url){
 }
 
 //update_data(Shishicai::URL);
-
-update_data('http://caipiao.163.com/order/preBet_resentAwardNum.html?gameEn=ssc');
+$hour = date('G');
+if($hour >= 10 || $hour < 2){
+    update_data('http://caipiao.163.com/order/preBet_resentAwardNum.html?gameEn=ssc');
+}
