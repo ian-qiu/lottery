@@ -7,14 +7,12 @@ include_once ROOT_DIR . 'model/lottery_util.php';
 include_once(ROOT_DIR . 'libs/Smarty-3.1.15/libs/Smarty.class.php');
 
 $db = new LotteryDBHelper();
-$sql = 'select * from shishicai order by item_date desc limit 800';
+$limit = isset($_REQUEST['limit']) ? (intval($_REQUEST['limit']) + 300) : 800;
+$sql = 'select * from shishicai order by item_date desc limit ' . $limit;
 $codes = $db->getAll($sql,'item_date');
 $codes = array_reverse($codes,true);
 
 $util = new LotteryUtil();
-foreach ($codes as $k => $v){
-    //$codes[$k]['last_300_codes'] = $util->getRecentIssues($v['item_date'], 300);
-}
 $json = json_encode(array('codes' => $codes));
 
 $smarty_options = array(

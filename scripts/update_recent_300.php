@@ -7,7 +7,7 @@ include_once ROOT_DIR . 'model/lottery_util.php';
 
 $util = new LotteryUtil();
 $db = new LotteryDBHelper();
-$sql = "select * from shishicai order by item_date desc limit 500;";
+$sql = "select * from shishicai order by item_date desc limit 1200;";
 $data = $db->getAll($sql);
 foreach ($data as $v){
     $item_date = $v['item_date'];

@@ -29,8 +29,10 @@ foreach ($data as $tmp){
     if($hit == $last_hit){
         $hit_count++;
     }else{
-        $ret[$hit_count]++;
-        $hit_count = 0;
+        if($hit == 2){
+            $ret[$hit_count]++;
+            $hit_count = 1;
+        }
     }
 }
 
