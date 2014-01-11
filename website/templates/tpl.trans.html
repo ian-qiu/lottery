@@ -17,7 +17,7 @@ and open the template in the editor.
                 var codes = $("#t1").val();
                 codes = codes.trim().split(/[^0-9]+/);
                 codes = $.unique(codes);
-                $("#t1").val(codes.join(" "));
+                $("#t2").val(codes.join(" "));
             }
             
             $(function(){
@@ -28,12 +28,10 @@ and open the template in the editor.
         </script>
     </head>
     <body>
-        <div>
+        <div style="text-align: center;">
             <div>
-                <textarea cols="20" rows="10" id="t1"></textarea>
-            </div>
-            <div>
-                <textarea cols="20" rows="10" id="t2"></textarea>
+                <textarea cols="50" rows="10" id="t1"></textarea>
+                <textarea cols="50" rows="10" id="t2"></textarea>
                 <p>
                     <button id="btn-1">格式化</button>
                     <button>复制</button>

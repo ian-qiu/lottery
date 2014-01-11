@@ -14,5 +14,5 @@ $s = new Smarty();
 foreach ($smarty_options as $option => $v){
     $s->$option = $v;
 }
-$s->display('tpl.transform.html');
+$s->display('tpl.trans.html');
 
