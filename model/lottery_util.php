@@ -19,6 +19,26 @@ class LotteryUtil{
         return $this->getRecent300($data, $item_code);
     }
     
+    public function calRecent300V3($item_date,$item_code,$num = 300){
+        include ROOT_DIR . 'config/data.php';
+        global $odd_list;
+        $data = $this->getRecent300V2List($item_date, $num);
+        $ret = '';
+        for($start = 0;$start < 3;$start++){
+            $codes = array();
+            foreach ($data as $tmp){
+                $codes[] = substr($tmp['item_code'],$start,3);
+            }
+            $codes = array_diff($odd_list, $codes);
+            if(in_array(substr($item_code,$start,3),$codes)){
+                $ret .= 1;
+            }else{
+                $ret .= 2;
+            }
+            return $ret;
+        }
+    }
+    
     public function getRecent300V2List($item_date,$num = 300){
         $db = new LotteryDBHelper();
         list(,$issue) = explode('-',$item_date);

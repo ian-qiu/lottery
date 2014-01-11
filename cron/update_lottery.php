@@ -72,8 +72,9 @@ function update_data($url){
         if(!empty($item_date) && !empty($item_code) && preg_match('/^\d{5}$/',$item_code) > 0){
             $recent_300_v1 = $util->calRecent300V1($item_date, $item_code);
             $recent_300_v2 = $util->calRecent300V2($item_date, $item_code);
-            $sql = 'insert into shishicai(item_date,item_code,recent_300_v1,recent_300_v2,create_time)values("%s","%s","%s","%s",%d) on duplicate key update item_code=values(item_code),recent_300_v1=values(recent_300_v1),recent_300_v2=values(recent_300_v2)';
-            $sql = sprintf($sql,$item_date,$item_code,$recent_300_v1,$recent_300_v2,time());
+            $odd_recent_300_v2 = $util->calRecent300V3($item_date, $item_code);
+            $sql = 'insert into shishicai(item_date,item_code,recent_300_v1,recent_300_v2,odd_recent_300_v2,create_time)values("%s","%s","%s","%s","%s",%d) on duplicate key update item_code=values(item_code),recent_300_v1=values(recent_300_v1),recent_300_v2=values(recent_300_v2)';
+            $sql = sprintf($sql,$item_date,$item_code,$recent_300_v1,$recent_300_v2,$odd_recent_300_v2,time());
             $db = new LotteryDBHelper();
             $db->update($sql);
         }else{
