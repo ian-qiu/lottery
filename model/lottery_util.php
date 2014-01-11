@@ -31,12 +31,12 @@ class LotteryUtil{
             }
             $codes = array_diff($odd_list, $codes);
             if(in_array(substr($item_code,$start,3),$codes)){
-                $ret .= 1;
+                $ret .= '1';
             }else{
-                $ret .= 2;
+                $ret .= '2';
             }
-            return $ret;
         }
+        return $ret;
     }
     
     public function getRecent300V2List($item_date,$num = 300){
