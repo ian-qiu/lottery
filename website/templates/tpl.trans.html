@@ -16,13 +16,17 @@ and open the template in the editor.
             function transform(){
                 var codes = $("#t1").val();
                 codes = codes.trim().split(/[^0-9]+/);
-                codes = $.unique(codes);
+                codes = $.unique(codes).sort();
                 $("#t2").val(codes.join(" "));
             }
             
             $(function(){
                 $("#btn-1").click(function(){
                     transform();
+                });
+                $("#btn-2").click(function(){
+                    $("#t1").val("");
+                    $("#t2").val("");
                 });
             });
         </script>
@@ -34,6 +38,7 @@ and open the template in the editor.
                 <textarea cols="50" rows="10" id="t2"></textarea>
                 <p>
                     <button id="btn-1">格式化</button>
+                    <button id="btn-2">清除</button>
                     <button>复制</button>
                 </p>
             </div>
