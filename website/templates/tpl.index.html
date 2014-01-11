@@ -167,6 +167,11 @@
                 $("#recent-items2").click(function(){
                     get_recent_items($("#recent-items-text2"),$("#recent-items2"),'get_recent_items2');
                 });
+                
+                get_recent_items($("#recent-items-text3"),$("#recent-items3"),'get_recent_items3');
+                $("#recent-items3").click(function(){
+                    get_recent_items($("#recent-items-text3"),$("#recent-items3"),'get_recent_items3');
+                });
             });
         </script>
     </head>
@@ -193,6 +198,11 @@
                     <button id="recent-items2"></button>
                     <br/>
                     <textarea id="recent-items-text2" cols="80" rows="15"></textarea>
+                </div>
+                <div style="display:inline-block;margin-left: 20px;">
+                    <button id="recent-items3"></button>
+                    <br/>
+                    <textarea id="recent-items-text3" cols="80" rows="15"></textarea>
                 </div>
             </div>
         </div>

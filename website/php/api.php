@@ -57,7 +57,43 @@ class LotteryApi{
         //sort($ret,SORT_STRING);
         $json = array();
         $json['item_date'] = $item_date . '-近三百天';
-        $json['codes'] = implode(',', $ret);
+        $json['codes'] = implode('', $ret);
+        echo json_encode($json);
+        exit;
+    }
+    
+    private function get_recent_items3(){
+        $db = new LotteryDBHelper();
+        $sql = "select * from shishicai order by item_date desc limit 1;";
+        $data = $db->getOne($sql);
+        $item_date = $data['item_date'];
+        list($date,$issue) = explode('-',$item_date);
+        if($issue == '120'){
+            $item_date = date('Ymd',strtotime('tomorrow',strtotime(substr($date,0,8)))) . '-001';
+        }else{
+            $item_date = $date . '-' . sprintf('%03d',intval($issue) + 1);
+        }
+        include_once ROOT_DIR . 'model/lottery_util.php';
+        $util = new LotteryUtil();
+        $list = $util->getRecent300V2List($item_date);
+        $ret = array();
+        foreach($list as $v){
+            $ret[] = substr($v['item_code'],2);
+        }
+        $ret = array_unique($ret);
+        $total = array();
+        for($i=0;$i<10;$i++){
+            for($j=0;$j<10;$j++){
+                for($k=0;$k<10;$k++){
+                    $total[] = strval($i) . strval($j) . $strval($k);
+                }
+            }
+        }
+        $total = array_diff($total,$ret);
+        //sort($ret,SORT_STRING);
+        $json = array();
+        $json['item_date'] = $item_date . '-奇数期&近三百天（共' . strval(count($total)) . '期）';
+        $json['codes'] = implode('', $total);
         echo json_encode($json);
         exit;
     }

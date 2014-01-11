@@ -37,7 +37,7 @@ foreach ($data as $tmp){
             $ret .= '0';
         }
     }
-    $sql = "update shishicai set odd_recent_300_v2='{$ret}' where item_date='{$item_date}'";
+    $sql = "update shishicai set odd_recent_300_v2='{$ret}' where item_date='{$item_date}';";
     echo $sql . PHP_EOL;
-    break;
+    //break;
 }
