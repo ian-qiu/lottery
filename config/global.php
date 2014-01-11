@@ -1,6 +1,6 @@
 <?php
 
-define('ROOT_DIR', dirname(__FILE__) . '/../');
+define('ROOT_DIR', dirname(dirname(__FILE__)) . '/');
 date_default_timezone_set('Asia/Shanghai');
 @ini_set('error_log','/tmp/php_errors.log');
 

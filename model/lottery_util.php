@@ -21,7 +21,6 @@ class LotteryUtil{
     
     public function calRecent300V3($item_date,$item_code,$num = 300){
         include ROOT_DIR . 'config/data.php';
-        global $odd_list;
         $data = $this->getRecent300V2List($item_date, $num);
         $ret = '';
         for($start = 0;$start < 3;$start++){
