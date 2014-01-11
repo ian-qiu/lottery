@@ -30,7 +30,7 @@ class LotteryApi{
         $ret = array_unique($ret);
         //sort($ret,SORT_STRING);
         $json = array();
-        $json['codes'] = implode(',', $ret);
+        $json['codes'] = implode(' ', $ret);
         echo json_encode($json);
         exit;
     }
@@ -57,7 +57,7 @@ class LotteryApi{
         //sort($ret,SORT_STRING);
         $json = array();
         $json['item_date'] = $item_date . '-近三百天';
-        $json['codes'] = implode('', $ret);
+        $json['codes'] = implode(' ', $ret);
         echo json_encode($json);
         exit;
     }
@@ -91,11 +91,11 @@ class LotteryApi{
         }
         $total = array_diff($total,$ret);
         include ROOT_DIR . 'config/data.php';
-        $ret = array_unique(array_merge($odd_list,$total));
+        $ret = array_unique(array_intersect($odd_list,$total));
         //sort($ret,SORT_STRING);
         $json = array();
         $json['item_date'] = $item_date . '-奇数期&近三百天（共' . strval(count($ret)) . '注）';
-        $json['codes'] = implode('', $ret);
+        $json['codes'] = implode(' ', $ret);
         echo json_encode($json);
         exit;
     }

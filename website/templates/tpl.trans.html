@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+        <script src="http://libs.baidu.com/backbone/0.9.2/backbone.js"></script>
+        <script type="text/javascript">
+            function transfrom(){
+                var codes = $("#t1").val();
+                codes = codes.trim().split(/[^0-9]+/);
+                codes = _.uniq(codes);
+                $("#t1").val(codes.join(" "));
+            }
+            
+            $(function(){
+                $("#btn-1").click(function(){
+                    transform();
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div>
+            <div>
+                <textarea cols="20" rows="10" id="t1"></textarea>
+            </div>
+            <div>
+                <textarea cols="20" rows="10" id="t2"></textarea>
+                <p>
+                    <button id="btn-1">格式化</button>
+                    <button>复制</button>
+                </p>
+            </div>
+        </div>
+    </body>
+</html>
