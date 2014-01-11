@@ -85,15 +85,17 @@ class LotteryApi{
         for($i=0;$i<10;$i++){
             for($j=0;$j<10;$j++){
                 for($k=0;$k<10;$k++){
-                    $total[] = strval($i) . strval($j) . $strval($k);
+                    $total[] = strval($i) . strval($j) . strval($k);
                 }
             }
         }
         $total = array_diff($total,$ret);
+        include ROOT_DIR . 'config/data.php';
+        $ret = array_unique(array_merge($odd_list,$total));
         //sort($ret,SORT_STRING);
         $json = array();
-        $json['item_date'] = $item_date . '-奇数期&近三百天（共' . strval(count($total)) . '期）';
-        $json['codes'] = implode('', $total);
+        $json['item_date'] = $item_date . '-奇数期&近三百天（共' . strval(count($ret)) . '注）';
+        $json['codes'] = implode('', $ret);
         echo json_encode($json);
         exit;
     }
