@@ -38,7 +38,7 @@ foreach ($smarty_options as $option => $v) {
 
 $db = new LotteryDBHelper();
 $start_date = '20140101-023';
-$end_date = '20140110-024';
+$end_date = '20140112-024';
 $sql = "select item_date,hit_v1 from shishicai where item_date>'$start_date' and item_date<'$end_date'";
 $data = $db->getAll($sql);
 $tmp = array();
@@ -49,9 +49,16 @@ foreach ($data as $v) {
 $ret = array();
 $dates = array();
 $hits = array();
+$colors = array();
 foreach ($tmp as $item_date => $arr) {
     $dates[] = $item_date;
-    $hits[] = calMaxMiss($arr);
+    $hit_count = calMaxMiss($arr);
+    $hits[] = $hit_count;
+    if($hit_count > 5){
+        $colors[] = "red";
+    }else{
+        $colors[] = "green";
+    }
 }
 /**
  * 
