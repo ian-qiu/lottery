@@ -46,9 +46,9 @@ $end_date .= '-024';
 if(isset($_REQUEST['start_date'])){
     $start_date = $_REQUEST['start_date'];
 }else{
-    $start_date = date('Ymd',strtotime('a month ago'));
+    $start_date = date('Ymd',strtotime('60 days ago'));
 }
-$end_date .= '-023';
+$start_date .= '-023';
 $sql = "select item_date,hit_v1 from shishicai where item_date>'$start_date' and item_date<'$end_date'";
 $data = $db->getAll($sql);
 $tmp = array();
@@ -100,8 +100,8 @@ $high_charts_setting = array (
     ),
     'plotOptions' =>array (
         'column' => array (
-            'pointPadding' => 0.2,
-             'borderWidth' => 0,
+            'pointPadding' => 0,
+             'borderWidth' => 2,
          ),
      ),
     'series' =>array (
