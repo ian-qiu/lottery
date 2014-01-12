@@ -25,6 +25,8 @@ function calMaxMiss($hits) {
     return $max;
 }
 
+$fenge = isset($_REQUEST['fenge']) ? intval($_REQUEST['fenge']) : 6;
+
 $smarty_options = array(
     'left_delimiter' => '{{',
     'right_delimiter' => '}}',
@@ -66,7 +68,7 @@ $colors = array();
 foreach ($tmp as $item_date => $arr) {
     $dates[] = $item_date;
     $hit_count = calMaxMiss($arr);
-    if($hit_count > 5){
+    if($hit_count > $fenge){
         $color = "red";
     }else{
         $color = "green";

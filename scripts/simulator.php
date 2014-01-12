@@ -33,7 +33,7 @@ Class Simulator{
         foreach($data as $v){
             $beishu = $this->getBeishu();
             $code = substr($v['item_code'],2,3);
-            $codes = $this->getOddRecent300($item_date);
+            $codes = $this->getOddRecent300($v['item_date']);
             $touru = $beishu * count($codes) * 0.02;
             $this->benjin -= $touru;
             $hit = in_array($code,$codes);
@@ -65,7 +65,7 @@ Class Simulator{
             echo "连挂6次！Game Over!";
             exit;
         }
-        return $this->beitou[$liangua];
+        return $this->beitou[$this->liangua];
     }
     
     private function getOddRecent300($item_date){
