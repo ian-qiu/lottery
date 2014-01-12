@@ -37,8 +37,18 @@ foreach ($smarty_options as $option => $v) {
 }
 
 $db = new LotteryDBHelper();
-$start_date = '20140101-023';
-$end_date = '20140112-024';
+if(isset($_REQUEST['end_date'])){
+    $end_date = $_REQUEST['end_date'];
+}else{
+    $end_date = date('Ymd',strtotime('tomorrow'));
+}
+$end_date .= '-024';
+if(isset($_REQUEST['start_date'])){
+    $start_date = $_REQUEST['start_date'];
+}else{
+    $start_date = date('Ymd',strtotime('a month ago'));
+}
+$end_date .= '-023';
 $sql = "select item_date,hit_v1 from shishicai where item_date>'$start_date' and item_date<'$end_date'";
 $data = $db->getAll($sql);
 $tmp = array();
