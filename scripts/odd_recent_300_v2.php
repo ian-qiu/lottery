@@ -15,7 +15,7 @@ include_once ROOT_DIR . 'model/lottery_util.php';
 
 $util = new LotteryUtil();
 $db = new LotteryDBHelper();
-$sql = "select * from shishicai where item_date > '20140101-023'order by item_date desc;";
+$sql = "select * from shishicai where item_date > '20140101-023' order by item_date desc;";
 $data = $db->getAll($sql);
 
 foreach ($data as $tmp){

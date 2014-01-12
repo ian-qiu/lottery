@@ -17,6 +17,9 @@ function calMaxMiss($hits) {
             $total = 0;
         }
     }
+    if($max < 1){
+        return $total;
+    }
     return $max;
 }
 
