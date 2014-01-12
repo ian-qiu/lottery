@@ -53,12 +53,15 @@ $colors = array();
 foreach ($tmp as $item_date => $arr) {
     $dates[] = $item_date;
     $hit_count = calMaxMiss($arr);
-    $hits[] = $hit_count;
     if($hit_count > 5){
-        $colors[] = "red";
+        $color = "red";
     }else{
-        $colors[] = "green";
+        $color = "green";
     }
+    $hits[] = array(
+        'y' => $hit_count,
+        'color' => $color,
+    );
 }
 /**
  * 
