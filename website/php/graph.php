@@ -43,7 +43,8 @@ $sql = "select item_date,hit_v1 from shishicai where item_date>'$start_date' and
 $data = $db->getAll($sql);
 $tmp = array();
 foreach ($data as $v) {
-    $tmp[$v['item_date']][] = $v['hit_v1'];
+    $date = substr($v['item_date'],0,8);
+    $tmp[$date][] = $v['hit_v1'];
 }
 $ret = array();
 $dates = array();
