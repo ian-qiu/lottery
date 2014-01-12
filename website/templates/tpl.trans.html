@@ -9,15 +9,21 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
-        <script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
-        <!--<script type="text/javascript" src="http://libs.baidu.com/prototype/1.7.1.0/prototype.js"></script>-->
-        <!--<script type="text/javascript" src="http://libs.baidu.com/backbone/0.9.2/backbone.js"></script>-->
+        <script type="text/javascript" src="/jquery.js"></script>
+        <script type="text/javascript" src="/zeroclipboard-1.2.3/ZeroClipboard.js"></script>
         <script type="text/javascript">
             function transform(){
                 var codes = $("#t1").val();
                 codes = codes.trim().split(/[^0-9]+/);
                 codes = $.unique(codes).sort();
                 $("#t2").val(codes.join(" "));
+            }
+            
+            function bind_copy(){
+                var clip = new ZeroClipboard.Client();    
+                clip.setHandCursor(true);
+                clip.setContent($("#t2").val());
+                clip.clue("btn-3");
             }
             
             $(function(){
@@ -28,6 +34,7 @@ and open the template in the editor.
                     $("#t1").val("");
                     $("#t2").val("");
                 });
+                bind_copy();
             });
         </script>
     </head>
@@ -39,7 +46,7 @@ and open the template in the editor.
                 <p>
                     <button id="btn-1">格式化</button>
                     <button id="btn-2">清除</button>
-                    <button>复制</button>
+                    <button id="btn-3">复制</button>
                 </p>
             </div>
         </div>
