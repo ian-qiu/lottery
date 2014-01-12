@@ -81,6 +81,8 @@ $high_charts_setting = array (
        'categories' => $dates,
     ),
     'yAxis' =>array (
+        'tickInterval' => 1,
+        'max' => 15,
        'min' => 0,
        'title' => array (
            'text' => '最大连挂次数 (次)',
