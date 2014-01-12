@@ -66,47 +66,39 @@ foreach ($tmp as $item_date => $arr) {
         'color' => $color,
     );
 }
-/**
- * 
- */
+
 $high_charts_setting = array (
     'chart' =>array (
         'type' => 'column',
      ),
     'title' =>array (
-       'text' => 'Monthly Average Rainfall',
+       'text' => '奇数期&近300天最大连挂',
     ),
     'subtitle' =>array (
-       'text' => 'Source: WorldClimate.com',
+       'text' => 'www.shishicai.cn',
     ),
- 'xAxis' =>array (
-    'categories' => $dates,
+    'xAxis' =>array (
+       'categories' => $dates,
     ),
- 'yAxis' =>
- array (
-'min' => 0,
- 'title' =>
- array (
-'text' => 'Rainfall (mm)',
- ),
- ),
- 'plotOptions' =>
- array (
-'column' =>
- array (
-'pointPadding' => 0.2,
- 'borderWidth' => 0,
- ),
- ),
- 'series' =>
-    array (
-        array (
-            'name' => 'Tokyo',
-            'data' => $hits
-        )
+    'yAxis' =>array (
+       'min' => 0,
+       'title' => array (
+           'text' => '最大连挂次数 (次)',
+       ),
+    ),
+    'plotOptions' =>array (
+        'column' => array (
+            'pointPadding' => 0.2,
+             'borderWidth' => 0,
+         ),
+     ),
+    'series' =>array (
+       array (
+           'name' => '024至次日023最大连挂次数',
+           'data' => $hits
+       )
     )
  );
 
 $s->assign("high_charts_setting", json_encode($high_charts_setting));
-
 $s->display('tpl.graph.html');
