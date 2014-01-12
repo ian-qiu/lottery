@@ -11,23 +11,29 @@ $db = new LotteryDBHelper();
 
 Class Simulator{
     // 本金
-    public $benjin = 3100;
+    public $benjin = 7500;
     public $danzhu = 0.02;
     public $award = 19.4;
     public $liangua = 0;
-    public $beitou = array(1,3,8,23,61,162);
+    //public $beitou = array(1,3,8,23,61,162);
+    public $beitou = array(2,6,17,50,140,400);
     
     public $test_start = '20140111-024';
     public $test_end = '20140112-023';
     
+    public function __construct() {
+        
+    }
+    
     public function test(){
         $sql = "select * from shishicai where item_date>='%s' and item_date<='%s' order by item_date asc";
+        $sql = sprintf($sql,$this->test_start,$this->test_end);
         global $db;
         $data = $db->getAll($sql);
         foreach($data as $v){
+            $beishu = $this->getBeishu();
             $code = substr($v['item_code'],2,3);
             $codes = $this->getOddRecent300($item_date);
-            $beishu = $this->getBeishu();
             $touru = $beishu * count($codes) * 0.02;
             $this->benjin -= $touru;
             $hit = in_array($code,$codes);
@@ -44,8 +50,9 @@ Class Simulator{
     }
     
     private function getBeishu(){
-        if($liangua >= 6){
+        if($this->liangua >= 6){
             echo "连挂6次！Game Over!";
+            exit;
         }
         return $this->beitou[$liangua];
     }
