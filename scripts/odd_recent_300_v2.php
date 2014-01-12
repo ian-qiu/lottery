@@ -13,9 +13,18 @@ include_once ROOT_DIR . 'db/lottery_db_helper.php';
 
 include_once ROOT_DIR . 'model/lottery_util.php';
 
+$total = array();
+for($i=0;$i<10;$i++){
+    for($j=0;$j<10;$j++){
+        for($k=0;$k<10;$k++){
+            $total[] = strval($i) . strval($j) . strval($k);
+        }
+    }
+}
+
 $util = new LotteryUtil();
 $db = new LotteryDBHelper();
-$sql = "select * from shishicai where item_date > '20140101-023' order by item_date desc;";
+$sql = "select * from shishicai where item_date > '2011001-023' order by item_date desc;";
 $data = $db->getAll($sql);
 
 foreach ($data as $tmp){
@@ -25,10 +34,10 @@ foreach ($data as $tmp){
     $item_code = substr($code,2,3);
     $recent_300 = array();
     foreach ($tmp as $v) {
-        $recent_300[] = substr($v['item_code'],$start,3);
+        $recent_300[] = substr($v['item_code'],2,3);
     }
-    $recent_300 = array_unique($recent_300);
-    $end = array_diff($odd_list,$recent_300);
+    $recent_300 = array_diff($total,$recent_300);
+    $end = array_intersect($odd_list, $recent_300);
     if(in_array($item_code,$end)){
         $ret = 1;
     }else{

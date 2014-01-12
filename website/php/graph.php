@@ -43,7 +43,10 @@ $sql = "select item_date,hit_v1 from shishicai where item_date>'$start_date' and
 $data = $db->getAll($sql);
 $tmp = array();
 foreach ($data as $v) {
-    $date = substr($v['item_date'],0,8);
+    list($date,$issue) = explode('-',$v['item_date']);
+    if($issue < '024'){
+        $date = date('Ymd',strtotime($date) - 3600);
+    }
     $tmp[$date][] = $v['hit_v1'];
 }
 $ret = array();
@@ -67,15 +70,15 @@ foreach ($tmp as $item_date => $arr) {
  * 
  */
 $high_charts_setting = array (
-'chart' =>array (
-    'type' => 'column',
- ),
- 'title' =>array (
-    'text' => 'Monthly Average Rainfall',
- ),
- 'subtitle' =>array (
-    'text' => 'Source: WorldClimate.com',
- ),
+    'chart' =>array (
+        'type' => 'column',
+     ),
+    'title' =>array (
+       'text' => 'Monthly Average Rainfall',
+    ),
+    'subtitle' =>array (
+       'text' => 'Source: WorldClimate.com',
+    ),
  'xAxis' =>array (
     'categories' => $dates,
     ),
