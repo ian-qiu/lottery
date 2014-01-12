@@ -51,7 +51,7 @@ $dates = array();
 $hits = array();
 foreach ($tmp as $item_date => $arr) {
     $dates[] = $item_date;
-    $hits[] = calMaxMiss($hits);
+    $hits[] = calMaxMiss($arr);
 }
 /**
  * 
