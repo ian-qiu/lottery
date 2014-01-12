@@ -45,6 +45,17 @@ Class Simulator{
                 $award = 0;
             }
             $this->benjin += $award;
+            $arr = array(
+                $v['item_date'],
+                $v['item_code'],
+                $this->liangua,
+                $beishu,
+                $touru,
+                $award,
+                $award - $touru,
+                $this->benjin
+            );
+            echo implode(',',$arr) . PHP_EOL;
         }
         return $this->benjin;
     }
@@ -80,3 +91,4 @@ Class Simulator{
 }
 
 $sim = new Simulator();
+$sim->test();
