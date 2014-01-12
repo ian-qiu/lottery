@@ -38,6 +38,31 @@ class LotteryUtil{
         return $ret;
     }
     
+    public function calHitV1($item_date,$item_code){
+        $total = array();
+        for($i=0;$i<10;$i++){
+            for($j=0;$j<10;$j++){
+                for($k=0;$k<10;$k++){
+                    $total[] = strval($i) . strval($j) . strval($k);
+                }
+            }
+        }
+        $list = $this->getRecent300V2List($item_date);
+        $ret = array();
+        foreach($list as $tmp){
+            $ret[] = substr($tmp['item_code'],2,3);
+        }
+        $list1 = array_diff($total,$ret);
+        include ROOT_DIR . 'config/data.php';
+        $end = array_intersect($odd_list, $list1);
+        $code = substr($item_code,2,3);
+        if(in_array($code,$end)){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+    
     public function getRecent300V2List($item_date,$num = 300){
         $db = new LotteryDBHelper();
         list(,$issue) = explode('-',$item_date);
