@@ -15,14 +15,14 @@ include_once ROOT_DIR . 'model/lottery_util.php';
 
 $util = new LotteryUtil();
 $db = new LotteryDBHelper();
-$sql = "select * from shishicai order by item_date desc limit 1200;";
+$sql = "select item_code from shishicai where item_date > '20130101-001' order by item_date desc;";
 $data = $db->getAll($sql);
 
 $last_hit = 0;
 $hit_count = 0;
 $ret = array();
 foreach ($data as $tmp){
-    $hit = substr($tmp['odd_recent_300_v2'],-1);
+    $hit = substr($tmp['item_code'],2);
     if($last_hit == 0){
         $last_hit = $hit;
     }
