@@ -42,16 +42,33 @@ $db = new LotteryDBHelper();
 if(isset($_REQUEST['end_date'])){
     $end_date = $_REQUEST['end_date'];
 }else{
-    $end_date = date('Ymd',strtotime('tomorrow'));
+    $end_date = date('Y-m-d',strtotime('tomorrow'));
 }
-$end_date .= '-024';
+$query_end_date = date('Ymd',strtotime($end_date)) . '-024';
 if(isset($_REQUEST['start_date'])){
     $start_date = $_REQUEST['start_date'];
 }else{
-    $start_date = date('Ymd',strtotime('60 days ago'));
+    $start_date = date('Y-m-d',strtotime('60 days ago'));
 }
-$start_date .= '-023';
-$sql = "select item_date,hit_v1 from shishicai where item_date>'$start_date' and item_date<'$end_date'";
+if(isset($_REQUEST['type'])){
+	$type = $_REQUEST['type'];
+}else{
+	$type = 'odd_recent_300';
+}
+
+function get_codes($type){
+	$file = ROOT_DIR . "/config/500codes/" . $type . '.txt';
+	$contents = file_get_contents($file);
+	return preg_split('/\s+/',$contents);
+}
+
+if($type != "odd_recent_300"){
+	$codes = get_codes($type);
+}
+
+$types = array('odd_recent_300' => '奇数期&最近三百天','1' => '1','2' => '2');
+$query_start_date .= date('Ymd',strtotime($start_date)) . '-023';
+$sql = "select item_date,hit_v1 from shishicai where item_date>'$query_start_date' and item_date<'$query_end_date'";
 $data = $db->getAll($sql);
 $tmp = array();
 foreach ($data as $v) {
@@ -59,7 +76,11 @@ foreach ($data as $v) {
     if($issue < '024'){
         $date = date('Ymd',strtotime($date) - 3600);
     }
-    $tmp[$date][] = $v['hit_v1'];
+	if($type == "odd_recent_300"){
+		$tmp[$date][] = $v['hit_v1'];
+	}else{
+		$tmp[$date][] = in_array(substr($v['item_code'],2),$codes) ? 1 : 0;
+	}
 }
 $ret = array();
 $dates = array();
@@ -114,5 +135,8 @@ $high_charts_setting = array (
     )
  );
 
+$s->assign("start_date", $start_date);
+$s->assign("end_date", $end_date);
+$s->assign("types", $types);
 $s->assign("high_charts_setting", json_encode($high_charts_setting));
 $s->display('tpl.graph.html');
