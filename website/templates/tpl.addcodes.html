@@ -17,11 +17,12 @@ and open the template in the editor.
     </head>
     <body>
         <div>
-          <form class="form-inline" role="form">
-              <input type="text" class="form-control" id="codes_name" placeholder="该组号码名称">
-              <textarea id="codes" class="form-control" rows="3" placeholder="该组号码"></textarea>
-            <button type="submit" class="btn btn-primary">提交</button>
-          </form>
+            <form method="post" action="?action=addCodes">
+                <input type="hidden" name="id">
+                <input type="text" name="codes_desc">
+                <textarea name="codes"></textarea>
+                <button type="submit">提交</button>
+            </form>
         </div>
     </body>
 </html>

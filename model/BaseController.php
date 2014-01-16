@@ -9,6 +9,10 @@
 class BaseController{
     
     protected $output = array();
+    
+    protected function getParam($key,$default = ""){
+        return isset($_REQUEST[$key]) ? $_REQUEST[$key] : $default;
+    }
 
     public function display($template){
         $s = Doraemon::getSmarty();
