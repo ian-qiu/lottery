@@ -14,6 +14,7 @@ class PageController extends BaseController{
         $list = $db->getAll($sql);
         $code_names = array();
         $hits = array();
+        $max_miss = array();
         foreach ($data as $id => $v){
             $code_names[] = $v['codes_desc'];
             $codes = explode(',', $v['codes']);
@@ -26,6 +27,7 @@ class PageController extends BaseController{
                 }
             }
             $hits[] = $miss;
+            $max_miss[] = $v['max_miss'];
         }
         $high_charts_setting = array (
             'chart' =>array (
@@ -56,8 +58,12 @@ class PageController extends BaseController{
              ),
             'series' =>array (
                array (
-                   'name' => '024至次日023最大连挂次数',
+                   'name' => '当前最大连挂次数',
                    'data' => $hits
+               ),
+                array (
+                   'name' => '历史最大连挂次数',
+                   'data' => $max_miss
                )
             )
          );
