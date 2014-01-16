@@ -16,6 +16,7 @@ class PageController extends BaseController{
     
     public function addCodes(){
         $codes = $this->getParam('codes');
+        $codes = trim($codes);
         $codes = preg_split('/\s+/', $codes);
         $codes = implode(',',$codes);
         $codes_desc = $this->getParam('codes_desc');
