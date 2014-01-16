@@ -21,6 +21,10 @@ class PageController extends BaseController{
         $codes_desc = $this->getParam('codes_desc');
         $id = $this->getParam('id');
         $create_time = time();
+        if(empty($codes) || empty($codes_desc)){
+            header('Location:maxmiss.php?action=showCodes');
+            exit;
+        }
         if($id){
             $sql = "update shishicai_codes set codes_desc='$codes_desc',codes='$codes',max_miss=0";
         }else{
