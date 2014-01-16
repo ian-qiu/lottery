@@ -44,7 +44,7 @@ class PageController extends BaseController{
             ),
             'yAxis' =>array (
                 'tickInterval' => 1,
-                'max' => 15,
+                'max' => 20,
                'min' => 0,
                'title' => array (
                    'text' => '最大连挂次数 (次)',
@@ -59,11 +59,13 @@ class PageController extends BaseController{
             'series' =>array (
                array (
                    'name' => '当前最大连挂次数',
-                   'data' => $hits
+                   'data' => $hits,
+                    'color' => 'green',
                ),
                 array (
                    'name' => '历史最大连挂次数',
-                   'data' => $max_miss
+                   'data' => $max_miss,
+                    'color' => 'red',
                )
             )
          );
