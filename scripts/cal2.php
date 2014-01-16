@@ -16,7 +16,7 @@ include_once ROOT_DIR . 'model/lottery_util.php';
 $util = new LotteryUtil();
 $db = new LotteryDBHelper();
 
-for($i = 6;$i<19;$i++){
+for($i = 1;$i<19;$i++){
     $file = ROOT_DIR . '/config/500codes/' . strval($i) . '.txt';
     $contents = file_get_contents($file);
     $contents = trim($contents);
