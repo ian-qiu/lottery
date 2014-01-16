@@ -7,6 +7,61 @@ include_once ROOT_DIR . 'model/BaseController.php';
 class PageController extends BaseController{
     
     public function index(){
+        $sql = "select * from shishicai_codes";
+        $db = new LotteryDBHelper();
+        $data = $db->getAll($sql);
+        $sql = "select item_date,item_code from shishicai order by item_date desc limit 100";
+        $list = $db->getAll($sql);
+        $code_names = array();
+        $hits = array();
+        foreach ($data as $id => $v){
+            $code_names[] = $v['codes_desc'];
+            $codes = explode(',', $v['codes']);
+            $miss = 0;
+            foreach($list as $tmp){
+                if(in_array(substr($tmp['item_code'],2), $codes)){
+                    break;
+                }else{
+                    $miss++;
+                }
+            }
+            $hits[] = $miss;
+        }
+        $high_charts_setting = array (
+            'chart' =>array (
+                'type' => 'column',
+             ),
+            'title' =>array (
+               'text' => '最大连挂分布',
+            ),
+            'subtitle' =>array (
+               'text' => 'www.shishicai.cn',
+            ),
+            'xAxis' =>array (
+               'categories' => $code_names,
+            ),
+            'yAxis' =>array (
+                'tickInterval' => 1,
+                'max' => 15,
+               'min' => 0,
+               'title' => array (
+                   'text' => '最大连挂次数 (次)',
+               ),
+            ),
+            'plotOptions' =>array (
+                'column' => array (
+                    'pointPadding' => 0,
+                     'borderWidth' => 2,
+                 ),
+             ),
+            'series' =>array (
+               array (
+                   'name' => '024至次日023最大连挂次数',
+                   'data' => $hits
+               )
+            )
+         );
+        $this->output["high_charts_setting"] = json_encode($high_charts_setting);
         $this->display("tpl.maxmiss.html");
     }
     
