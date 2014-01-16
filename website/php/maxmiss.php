@@ -27,7 +27,7 @@ class PageController extends BaseController{
                 }
             }
             $hits[] = $miss;
-            $max_miss[] = $v['max_miss'];
+            $max_miss[] = intval($v['max_miss']);
         }
         $high_charts_setting = array (
             'chart' =>array (
