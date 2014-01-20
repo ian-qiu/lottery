@@ -54,7 +54,7 @@ and open the template in the editor.
             <table class="table table-striped">
                 <tr><th>item_date</th><th>item_code</th><th>codes</th></tr>
                 {{foreach from=$list item=data}}
-                <tr class="{{if $data.hit}}sucess{{else}}error{{/if}}">
+                <tr class="{{if $data.hit}}success{{else}}error{{/if}}">
                     <td>{{$data.item_date}}</td>
                     <td>{{$data.item_code}}</td>
                     <td>{{if $data.hit}}中{{else}}挂{{/if}}</td>
