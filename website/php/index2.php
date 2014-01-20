@@ -20,6 +20,7 @@ class PageController extends BaseController{
             $codes = $this->calCodes($tmp['item_date'], $tmp['item_code'], $data[$k+1]['item_code']);
             $tmp['codes'] = $codes;
             $tmp['hit'] = in_array(substr($tmp['item_code'],2), $codes);
+            $tmp['count'] = count($codes);
             $ret[] = $tmp;
         }
         $this->output['list'] = $ret;
