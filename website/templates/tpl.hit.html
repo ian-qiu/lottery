@@ -52,11 +52,12 @@ and open the template in the editor.
         </div>
         <div style="width:50%;margin-left: 25%;">
             <table class="table table-striped">
-                <tr><th>item_date</th><th>item_code</th><th>codes</th></tr>
+                <tr><th>期</th><th>中奖号码</th><th>号码</th><th>中/挂</th></tr>
                 {{foreach from=$list item=data}}
                 <tr class="{{if $data.hit}}success{{else}}error{{/if}}">
                     <td>{{$data.item_date}}</td>
                     <td>{{$data.item_code}}</td>
+                    <td>{{$data.count}}</td>
                     <td>{{if $data.hit}}中{{else}}挂{{/if}}</td>
                 </tr>
                 {{/foreach}}
