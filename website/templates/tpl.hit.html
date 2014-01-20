@@ -51,10 +51,11 @@ and open the template in the editor.
             <button type="button" class="btn btn-primary" id="query-btn">查询</button>
         </div>
         <div style="width:50%;margin-left: 25%;">
+            <div>
             <table class="table table-striped">
                 <tr><th>期</th><th>中奖号码</th><th>号码</th><th>中/挂</th></tr>
                 {{foreach from=$list item=data}}
-                <tr class="{{if $data.hit === true}}success{{elseif $data.hit === false}}error{{else}}info{{/if}}">
+                <tr class="{{if $data.hit === true}}success{{elseif $data.hit === false}}error{{else}}warning{{/if}}">
                     <td>{{$data.item_date}}</td>
                     <td>{{$data.item_code}}</td>
                     <td>{{$data.count}}</td>
@@ -62,6 +63,12 @@ and open the template in the editor.
                 </tr>
                 {{/foreach}}
             </table>
+            </div>
+            <div>
+                <textarea>
+                {{$codes}}
+                </textarea>
+            </div>
         </div>
     </body>
 </html>
