@@ -29,6 +29,8 @@ class PageController extends BaseController{
             $tmp['count'] = count($codes);
             $ret[] = $tmp;
         }
+        $this->output['next_issue'] = $next_issue;
+        $this->output['next_codes_count'] = count($codes);
         $this->output['codes'] = implode(" ", $codes);
         $this->output['list'] = $ret;
         $this->display("tpl.hit.html");
