@@ -16,12 +16,12 @@ and open the template in the editor.
         <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" />
         <script type="text/javascript" src="/bootstrap/datepicker/js/bootstrap-datepicker.js"></script>
         <link rel="stylesheet" href="/bootstrap/datepicker/css/datepicker.css" />
-		<style type="text/css">
-			.top-query {
-				text-align:center;
-				margin:10px 0px;
-			}
-		</style>
+        <style type="text/css">
+            div#top-query {
+                text-align:center;
+                margin:18px 0px;
+            }
+        </style>
         <script type="text/javascript">
             $(function () {
                 init_highcharts();
@@ -38,26 +38,26 @@ and open the template in the editor.
                 $('#end_date').datepicker();
             }
 			
-			function bind_query(){
-				$('#query-btn').click(function(){
-					var keys = ["start_date","end_date","code_type"];
-					var params = {};
-					for(var i in keys){
-						key = keys[i];
-						params[key] = $("#"+key).val();
-					}
-					window.location.href = '?' + $.param(params);
-				});
-			}
+            function bind_query(){
+                $('#query-btn').click(function(){
+                    var keys = ["start_date","end_date","code_type"];
+                    var params = {};
+                    for(var i in keys){
+                            key = keys[i];
+                            params[key] = $("#"+key).val();
+                    }
+                    window.location.href = '?' + $.param(params);
+                });
+            }
         </script>
     </head>
     <body>
-        <div class="top-query">
-			<select id="code_type">
-			{{foreach from=$types item=type_name key=type_value}}
-				<option value="{{$type_value}}"{{if $type == $type_value}} selected{{/if}}>{{$type_name}}</option>
-			{{/foreach}}
-			</select>
+        <div id="top-query" class="form-inline">
+            <select id="code_type">
+            {{foreach from=$types item=type_name key=type_value}}
+                <option value="{{$type_value}}"{{if $type == $type_value}} selected{{/if}}>{{$type_name}}</option>
+            {{/foreach}}
+            </select>
             <input type="text" value="{{$start_date}}" id="start_date" data-date-format="yyyy-mm-dd">
             <span>To</span>
             <input type="text" value="{{$end_date}}" id="end_date" data-date-format="yyyy-mm-dd">
