@@ -51,7 +51,7 @@ and open the template in the editor.
             
             function bind_copy(){
                 var clip = new ZeroClipboard( $("#next-issue-btn"), {
-                    moviePath: "/ZeroClipboard.swf"
+                    moviePath: "ZeroClipboard.swf"
                 });
                 clip.on( 'dataRequested', function ( client, args ) {
                     clip.setText( $("#next-codes").val() );
