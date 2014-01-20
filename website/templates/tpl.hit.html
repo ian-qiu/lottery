@@ -15,17 +15,22 @@ and open the template in the editor.
         <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
         <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" />
         <script type="text/javascript" src="/bootstrap/datepicker/js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" src="/zeroclipboard-1.2.3/ZeroClipboard.js"></script>
         <link rel="stylesheet" href="/bootstrap/datepicker/css/datepicker.css" />
         <style type="text/css">
             div#top-query {
                 text-align:center;
                 margin:18px 0px;
             }
+            #next-codes{
+                width: auto;
+            }
         </style>
         <script type="text/javascript">
             $(function () {
                 init_datepicker();
 		bind_query();
+                bind_copy();
             });
             
             function init_datepicker(){
@@ -41,6 +46,15 @@ and open the template in the editor.
                             params[key] = $("#"+key).val();
                     }
                     window.location.href = '?' + $.param(params);
+                });
+            }
+            
+            function bind_copy(){
+                var clip = new ZeroClipboard( $("#next-issue-btn"), {
+                    moviePath: "/ZeroClipboard.swf"
+                });
+                clip.on( 'dataRequested', function ( client, args ) {
+                    clip.setText( $("#next-codes").val() );
                 });
             }
         </script>
@@ -65,9 +79,8 @@ and open the template in the editor.
             </table>
             </div>
             <div>
-                <textarea>
-                {{$codes}}
-                </textarea>
+                <button id="next-issue-btn">{{$next_issue}}期号码-共{{$next_codes_count}}注</button>
+                <textarea id="next-codes" cols="80" rows="10">{{$next_codes}}</textarea>
             </div>
         </div>
     </body>
