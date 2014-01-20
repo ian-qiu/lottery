@@ -134,4 +134,14 @@ class LotteryUtil{
         }
         return $ret;
     }
+    
+    public static function getNextIssue($item_date){
+        list($date,$issue) = explode('-',$item_date);
+        if($issue == '120'){
+            $new_date = date('Ymd',strtotime('tomorrow',strtotime(substr($date,0,8)))) . '-001';
+        }else{
+            $new_date = $date . '-' . sprintf('%03d',intval($issue) + 1);
+        }
+        return $new_date;
+    }
 }
