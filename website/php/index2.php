@@ -43,12 +43,17 @@ class PageController extends BaseController{
         $codes = array_intersect($total, $odd_list);
         $ret = array();
         $last_code_sum = LotteryUtil::calSumValue(substr($last_code,2));
+        $last_code_trend = LotteryUtil::calTrendCode(substr($last_code,2));
         foreach ($codes as $code){
             if(LotteryUtil::isStraightCode($code)){
                 continue;
             }
             $sum = array_sum(str_split($code));
             if($sum == $last_code_sum){
+                continue;
+            }
+            $code_trend = LotteryUtil::calTrendCode($code);
+            if($last_code_trend = $code_trend){
                 continue;
             }
             $ret[] = $code;
