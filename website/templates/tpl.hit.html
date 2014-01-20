@@ -50,11 +50,11 @@ and open the template in the editor.
             <input class="span2" type="text" value="{{$start_date}}" id="start_date" data-date-format="yyyy-mm-dd">
             <button type="button" class="btn btn-primary" id="query-btn">查询</button>
         </div>
-        <div>
-            <table>
+        <div style="width:50%;margin-left: 25%;">
+            <table class="table table-striped">
                 <tr><th>item_date</th><th>item_code</th><th>codes</th></tr>
                 {{foreach from=$list item=data}}
-                <tr>
+                <tr class="{{if $data.hit}}sucess{{else}}error{{/if}}">
                     <td>{{$data.item_date}}</td>
                     <td>{{$data.item_code}}</td>
                     <td>{{if $data.hit}}中{{else}}挂{{/if}}</td>
