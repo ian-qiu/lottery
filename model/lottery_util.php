@@ -94,4 +94,29 @@ class LotteryUtil{
         }
         return $t1.$t2.$t3;
     }
+    
+    public static function getTotalCodes(){
+        $codes = array();
+        for($i=0;$i<1000;$i++){
+            $codes[] = sprintf("%03s", $i);
+        }
+        return $codes;
+    }
+    
+    public static function isStraightCode($code){
+        $arr = str_split($code);
+        sort($arr,SORT_NUMERIC);
+        list($a,$b,$c) = $arr;
+        if($a < 8 && $a+1==$b &&$b+1==$c){
+            return true;
+        }
+        if($a == 0 && ($b == 8 && $c == 9 || $b == 1 && $c == 9)){
+            return true;
+        }
+        return false;
+    }
+    
+    public static function calSumValue($code){
+        return array_sum(str_split($code)) % 10;
+    }
 }
