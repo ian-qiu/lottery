@@ -9,6 +9,7 @@ class PageController extends BaseController{
     
     public function index(){
         $start_date = $this->getParam("start_date",  date("Ymd"));
+        $this->output['start_date'] = $start_date;
         $sql = "select item_date,item_code from shishicai where item_date < '$start_date-121' order by item_date desc limit 21";
         $db = new LotteryDBHelper();
         $data = $db->getAll($sql);
@@ -21,13 +22,14 @@ class PageController extends BaseController{
                 continue;
             }
             $codes = $this->calCodes($tmp['item_date'], $data[$k-1]['item_code']);
-            $tmp['codes'] = $codes;
-            if($tmp['item_code']){
+            //$tmp['codes'] = $codes;
+            if(isset($tmp['item_code'])){
                 $tmp['hit'] = in_array(substr($tmp['item_code'],2), $codes);
             }
             $tmp['count'] = count($codes);
             $ret[] = $tmp;
         }
+        $this->output['codes'] = implode(" ", $codes);
         $this->output['list'] = $ret;
         $this->display("tpl.hit.html");
     }
