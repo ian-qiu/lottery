@@ -8,7 +8,7 @@ include_once ROOT_DIR . 'config/data.php';
 class PageController extends BaseController{
     
     public function index(){
-        $start_date = $this->getParam("start_date",  date("Y-m-d"));
+        $start_date = $this->getParam("start_date",  date("Ymd"));
         $sql = "select item_date,item_code from shishicai where item_date < '$start_date-121' order by item_date desc limit 21";
         $db = new LotteryDBHelper();
         $data = $db->getAll($sql);
@@ -34,7 +34,7 @@ class PageController extends BaseController{
         $code = substr($item_code, 2);
         foreach ($data as $tmp){
             $tmp_code = substr($tmp['item_code'],2);
-            $index = array_search($tmp, $total);
+            $index = array_search($tmp_code, $total);
             if($index !== false){
                 unset($total[$index]);
             }
