@@ -53,7 +53,7 @@ class PageController extends BaseController{
                 continue;
             }
             $code_trend = LotteryUtil::calTrendCode($code);
-            if($last_code_trend = $code_trend){
+            if($last_code_trend == $code_trend){
                 continue;
             }
             $ret[] = $code;
