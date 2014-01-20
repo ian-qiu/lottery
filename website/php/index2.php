@@ -12,8 +12,9 @@ class PageController extends BaseController{
         $sql = "select item_date,item_code from shishicai where item_date < '$start_date-121' order by item_date desc limit 21";
         $db = new LotteryDBHelper();
         $data = $db->getAll($sql);
+        $next_issue = LotteryUtil::getNextIssue($data[0]['item_date']);
         $data = array_reverse($data);
-        $data[] = array('item_date' => LotteryUtil::getNextIssue($data[0]['item_date']));
+        $data[] = array('item_date' => $next_issue);
         $ret = array();
         foreach ($data as $k => $tmp) {
             if($k == 0){
