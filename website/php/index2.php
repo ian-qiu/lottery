@@ -12,12 +12,13 @@ class PageController extends BaseController{
         $sql = "select item_date,item_code from shishicai where item_date < '$start_date-121' order by item_date desc limit 21";
         $db = new LotteryDBHelper();
         $data = $db->getAll($sql);
+        array_unshift($data, array('item_date' => LotteryUtil::getNextIssue($data[0]['item_date'])));
         $ret = array();
         foreach ($data as $k => $tmp) {
-            if($k == 20){
+            if($k == 21){
                 continue;
             }
-            $codes = $this->calCodes($tmp['item_date'], $tmp['item_code'], $data[$k+1]['item_code']);
+            $codes = $this->calCodes($tmp['item_date'], $data[$k+1]['item_code']);
             $tmp['codes'] = $codes;
             $tmp['hit'] = in_array(substr($tmp['item_code'],2), $codes);
             $tmp['count'] = count($codes);
@@ -27,11 +28,10 @@ class PageController extends BaseController{
         $this->display("tpl.hit.html");
     }
     
-    private function calCodes($item_date,$item_code,$last_code){
+    private function calCodes($item_date,$last_code){
         $util = new LotteryUtil();
         $total = LotteryUtil::getTotalCodes();
         $data = $util->getRecent300V2List($item_date);
-        $code = substr($item_code, 2);
         foreach ($data as $tmp){
             $tmp_code = substr($tmp['item_code'],2);
             $index = array_search($tmp_code, $total);
@@ -48,7 +48,7 @@ class PageController extends BaseController{
             if(LotteryUtil::isStraightCode($code)){
                 continue;
             }
-            $sum = array_sum(str_split($code));
+            $sum = LotteryUtil::calSumValue($code);
             if($sum == $last_code_sum){
                 continue;
             }
