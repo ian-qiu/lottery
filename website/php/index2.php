@@ -9,17 +9,17 @@ class PageController extends BaseController{
     
     public function index(){
         $start_date = $this->getParam("start_date",  date("Y-m-d"));
-        $sql = "select item_date,item_code from shishicai where item_date < '$start_date-121' order by item_date desc limit 121";
+        $sql = "select item_date,item_code from shishicai where item_date < '$start_date-121' order by item_date desc limit 21";
         $db = new LotteryDBHelper();
         $data = $db->getAll($sql);
         $ret = array();
         foreach ($data as $k => $tmp) {
-            if($k == 120){
+            if($k == 20){
                 continue;
             }
             $codes = $this->calCodes($tmp['item_date'], $tmp['item_code'], $data[$k+1]['item_code']);
             $tmp['codes'] = $codes;
-            $tmp['hit'] = in_array(substr($tmp['code'],2), $codes);
+            $tmp['hit'] = in_array(substr($tmp['item_code'],2), $codes);
             $ret[] = $tmp;
         }
         $this->output['list'] = $ret;
