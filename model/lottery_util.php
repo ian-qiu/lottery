@@ -119,4 +119,19 @@ class LotteryUtil{
     public static function calSumValue($code){
         return array_sum(str_split($code)) % 10;
     }
+    
+    public static function calTrendCode($code){
+        $arr = str_split($code);
+        $ret = '';
+        foreach ($arr as $v){
+            if(in_array($v, array(0,3,6,9))){
+                $ret .= '0';
+            }else if(in_array($v, array(1,4,7))){
+                $ret .= '1';
+            }else if(in_array($v, array(2,5,8))){
+                $ret .= '2';
+            }
+        }
+        return $ret;
+    }
 }
