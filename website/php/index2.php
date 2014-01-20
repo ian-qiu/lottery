@@ -9,18 +9,20 @@ class PageController extends BaseController{
     
     public function index(){
         $start_date = $this->getParam("start_date",  date("Ymd"));
-        $sql = "select item_date,item_code from shishicai where item_date < '$start_date-121' order by item_date desc limit 21";
+        $sql = "select item_date,item_code from shishicai where item_date < '$start_date-121' order by item_date asc limit 21";
         $db = new LotteryDBHelper();
         $data = $db->getAll($sql);
-        array_unshift($data, array('item_date' => LotteryUtil::getNextIssue($data[0]['item_date'])));
+        $data[] = array('item_date' => LotteryUtil::getNextIssue($data[0]['item_date']));
         $ret = array();
         foreach ($data as $k => $tmp) {
-            if($k == 21){
+            if($k == 0){
                 continue;
             }
-            $codes = $this->calCodes($tmp['item_date'], $data[$k+1]['item_code']);
+            $codes = $this->calCodes($tmp['item_date'], $data[$k-1]['item_code']);
             $tmp['codes'] = $codes;
-            $tmp['hit'] = in_array(substr($tmp['item_code'],2), $codes);
+            if($tmp['item_code']){
+                $tmp['hit'] = in_array(substr($tmp['item_code'],2), $codes);
+            }
             $tmp['count'] = count($codes);
             $ret[] = $tmp;
         }
