@@ -74,7 +74,8 @@ class PageController extends BaseController{
                array (
                    'name' => '当前最大连挂次数',
                    'data' => $hits,
-                    'color' => 'green',
+                   //'color' => 'green',
+                   'colorByPoint'=>true,
                ),
                 /*array (
                    'name' => '历史最大连挂次数',
@@ -101,7 +102,7 @@ class PageController extends BaseController{
             if($last === $v){
                 $count++;
             }else{
-                $ret = array(
+                $ret[] = array(
                     $last === 0 ? '挂' : '中',$count
                 );
             }
