@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script type="text/javascript" src="/jquery.js"></script>
+        <script type="text/javascript" src="/highcharts/highcharts.js"></script>
+        <script type="text/javascript" src="/highcharts/modules/data.js"></script>
+        <script type="text/javascript" src="/highcharts/modules/drilldown.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                init_highcharts();
+            });
+            
+            function init_highcharts(){
+                $('#container').highcharts({
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: 'Browser market shares. November, 2013'
+                    },
+                    subtitle: {
+                        text: 'Click the columns to view versions. Source: netmarketshare.com.'
+                    },
+                    xAxis: {
+                        type: 'category'
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Total percent market share'
+                        }
+                    },
+                    legend: {
+                        enabled: false
+                    },
+                    plotOptions: {
+                        series: {
+                            borderWidth: 0,
+                            dataLabels: {
+                                enabled: true,
+                                format: '{point.y:.1f}%'
+                            }
+                        }
+                    },
+
+                    tooltip: {
+                        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+                    }, 
+
+                    series: [{
+                        name: 'Brands',
+                        colorByPoint: true,
+                        data: {{$brandsData}}
+                    }],
+                    drilldown: {
+                        series: {{$drilldownSeries}}
+                    }
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    </body>
+</html>
