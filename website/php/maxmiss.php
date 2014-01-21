@@ -130,7 +130,7 @@ class PageController extends BaseController{
             $hits[] = array(
                 'name' => 'code-' . $id,
                 'drilldown' => 'code-' . $id,
-                'y' => $drilldown_data[0][1];
+                'y' => $drilldown_data[0][1],
              );
             $max_miss[] = intval($v['max_miss']);
         }
