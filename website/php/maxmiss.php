@@ -127,7 +127,7 @@ class PageController extends BaseController{
             $drilldown[] = array(
                 'name' => '号码-' . $id,
                 'id' => $id,
-                'data' => $this->processCodes($tmp),
+                'data' => $this->processCodes($drilldown_tmp),
             );
             $hits[] = array(
                 'name' => '号码-' . $id,
@@ -155,8 +155,13 @@ class PageController extends BaseController{
                 $ret[] = array(
                     $last === 0 ? '挂' : '中',$count
                 );
+                $count = 1;
             }
+            $last = $v;
         }
+        $ret[] = array(
+            $last === 0 ? '挂' : '中',$count
+        );
         return $ret;
     }
     
