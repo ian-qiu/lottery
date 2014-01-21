@@ -112,27 +112,25 @@ class PageController extends BaseController{
         foreach ($data as $id => $v){
             $code_names[] = $v['codes_desc'];
             $codes = explode(',', $v['codes']);
-            $miss = 0;
             $drilldown_tmp = array();
             foreach($list as $tmp){
                 $tmp_code = substr($tmp['item_code'],2);
                 if(in_array($tmp_code, $codes)){
                     $drilldown_tmp[] = 1;
-                    break;
                 }else{
                     $drilldown_tmp[] = 0;
-                    $miss++;
                 }
             }
+            $drilldown_data = $this->processCodes($drilldown_tmp);
             $drilldown[] = array(
-                'name' => '号码-' . $id,
+                'name' => 'code-' . $id,
                 'id' => $id,
-                'data' => $this->processCodes($drilldown_tmp),
+                'data' => $drilldown_data,
             );
             $hits[] = array(
-                'name' => '号码-' . $id,
-                'drilldown' => '号码-' . $id,
-                'y' => $miss
+                'name' => 'code-' . $id,
+                'drilldown' => 'code-' . $id,
+                'y' => $drilldown_data[0][1];
              );
             $max_miss[] = intval($v['max_miss']);
         }
