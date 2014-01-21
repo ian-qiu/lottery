@@ -10,23 +10,37 @@ class PageController extends BaseController{
         $sql = "select * from shishicai_codes";
         $db = new LotteryDBHelper();
         $data = $db->getAll($sql);
-        $sql = "select item_date,item_code from shishicai order by item_date desc limit 100";
+        $sql = "select item_date,item_code from shishicai order by item_date desc limit 120";
         $list = $db->getAll($sql);
         $code_names = array();
         $hits = array();
         $max_miss = array();
+        $drilldown = array();
         foreach ($data as $id => $v){
             $code_names[] = $v['codes_desc'];
             $codes = explode(',', $v['codes']);
             $miss = 0;
+            $drilldown_tmp = array();
             foreach($list as $tmp){
-                if(in_array(substr($tmp['item_code'],2), $codes)){
+                $tmp_code = substr($tmp['item_code'],2);
+                if(in_array($tmp_code, $codes)){
+                    $drilldown_tmp[] = 1;
                     break;
                 }else{
+                    $drilldown_tmp[] = 0;
                     $miss++;
                 }
             }
-            $hits[] = $miss;
+            $drilldown[] = array(
+                'name' => '号码-' . $id,
+                'id' => $id,
+                'data' => $this->processCodes($tmp),
+            );
+            $hits[] = array(
+                'name' => '号码-' . $id,
+                'drilldown' => '号码-' . $id,
+                'y' => $miss
+             );
             $max_miss[] = intval($v['max_miss']);
         }
         $high_charts_setting = array (
@@ -62,15 +76,37 @@ class PageController extends BaseController{
                    'data' => $hits,
                     'color' => 'green',
                ),
-                array (
+                /*array (
                    'name' => '历史最大连挂次数',
                    'data' => $max_miss,
                     'color' => 'red',
-               )
-            )
+               )*/
+            ),
+            'drilldown' => array(
+                'series'=> $drilldown,
+            ),
          );
         $this->output["high_charts_setting"] = json_encode($high_charts_setting);
         $this->display("tpl.maxmiss.html");
+    }
+    
+    private function processCodes($data){
+        $last = false;
+        $count = 0;
+        $ret = array();
+        foreach ($data as $v) {
+            if($last === false){
+                $last = $v;
+            }
+            if($last === $v){
+                $count++;
+            }else{
+                $ret = array(
+                    $last === 0 ? '挂' : '中',$count
+                );
+            }
+        }
+        return $ret;
     }
     
     public function showCodes(){
