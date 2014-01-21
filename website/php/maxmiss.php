@@ -124,7 +124,7 @@ class PageController extends BaseController{
             $drilldown_data = $this->processCodes($drilldown_tmp);
             $drilldown[] = array(
                 'name' => 'code-' . $id,
-                'id' => $id,
+                'id' => 'code-' . $id,
                 'data' => $drilldown_data,
             );
             $hits[] = array(
