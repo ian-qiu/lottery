@@ -151,14 +151,18 @@ class PageController extends BaseController{
                 $count++;
             }else{
                 $ret[] = array(
-                    $last === 0 ? 'miss' : 'hit',$count
+                    'name' => $last === 0 ? 'miss' : 'hit',
+                    'y' => $count,
+                    'color' => $last === 0 ? 'red' : 'blue',
                 );
                 $count = 1;
             }
             $last = $v;
         }
         $ret[] = array(
-            $last === 0 ? 'miss' : 'hit',$count
+            'name' => $last === 0 ? 'miss' : 'hit',
+            'y' => $count,
+            'color' => $last === 0 ? 'red' : 'blue',
         );
         return $ret;
     }
