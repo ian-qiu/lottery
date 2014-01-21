@@ -136,8 +136,8 @@ class PageController extends BaseController{
              );
             $max_miss[] = intval($v['max_miss']);
         }
-        $s->assign("brandsData",  json_encode($hits));
-        $s->assign("drilldownSeries",  json_encode($drilldown));
+        $this->output["brandsData"] = json_encode($hits);
+        $this->output["drilldownSeries"] = json_encode($drilldown);
         $this->display("tpl.drilldown.html");
     }
     
