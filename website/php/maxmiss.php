@@ -99,6 +99,48 @@ class PageController extends BaseController{
         $this->display("tpl.maxmiss.html");
     }
     
+    public function index2(){
+        $sql = "select * from shishicai_codes";
+        $db = new LotteryDBHelper();
+        $data = $db->getAll($sql);
+        $sql = "select item_date,item_code from shishicai order by item_date desc limit 120";
+        $list = $db->getAll($sql);
+        $code_names = array();
+        $hits = array();
+        $max_miss = array();
+        $drilldown = array();
+        foreach ($data as $id => $v){
+            $code_names[] = $v['codes_desc'];
+            $codes = explode(',', $v['codes']);
+            $miss = 0;
+            $drilldown_tmp = array();
+            foreach($list as $tmp){
+                $tmp_code = substr($tmp['item_code'],2);
+                if(in_array($tmp_code, $codes)){
+                    $drilldown_tmp[] = 1;
+                    break;
+                }else{
+                    $drilldown_tmp[] = 0;
+                    $miss++;
+                }
+            }
+            $drilldown[] = array(
+                'name' => '号码-' . $id,
+                'id' => $id,
+                'data' => $this->processCodes($tmp),
+            );
+            $hits[] = array(
+                'name' => '号码-' . $id,
+                'drilldown' => '号码-' . $id,
+                'y' => $miss
+             );
+            $max_miss[] = intval($v['max_miss']);
+        }
+        $s->assign("brandsData",  json_encode($hits));
+        $s->assign("drilldownSeries",  json_encode($drilldown));
+        $this->display("tpl.drilldown.html");
+    }
+    
     private function processCodes($data){
         $last = false;
         $count = 0;
