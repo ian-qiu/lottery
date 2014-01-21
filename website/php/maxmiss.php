@@ -132,7 +132,7 @@ class PageController extends BaseController{
                 'drilldown' => 'code-' . $id,
                 'y' => $drilldown_data[0][1],
              );
-            $max_miss[] = intval($v['max_miss']);
+            //$max_miss[] = intval($v['max_miss']);
         }
         $this->output["brandsData"] = json_encode($hits);
         $this->output["drilldownSeries"] = json_encode($drilldown);
@@ -151,14 +151,14 @@ class PageController extends BaseController{
                 $count++;
             }else{
                 $ret[] = array(
-                    $last === 0 ? '挂' : '中',$count
+                    $last === 0 ? 'miss' : 'hit',$count
                 );
                 $count = 1;
             }
             $last = $v;
         }
         $ret[] = array(
-            $last === 0 ? '挂' : '中',$count
+            $last === 0 ? 'miss' : 'hit',$count
         );
         return $ret;
     }
