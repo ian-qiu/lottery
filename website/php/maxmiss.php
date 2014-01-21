@@ -54,6 +54,7 @@ class PageController extends BaseController{
                'text' => 'www.shishicai.cn',
             ),
             'xAxis' =>array (
+                'type' => 'category',
                'categories' => $code_names,
             ),
             'yAxis' =>array (
@@ -69,6 +70,13 @@ class PageController extends BaseController{
                     'pointPadding' => 0,
                      'borderWidth' => 2,
                  ),
+                'series' => array(
+                     'borderWidth'=> 0,
+                    'dataLabels'=> array(
+                        'enabled' => true,
+                        'format' => '{point.y:.1f}%'
+                    )
+                ),
              ),
             'series' =>array (
                array (
