@@ -11,6 +11,9 @@ include dirname(__FILE__) . '/../config/data.php';
 include_once ROOT_DIR . 'db/lottery_db_helper.php';
 include_once ROOT_DIR . 'model/lottery_util.php';
 
+set_time_limit(0);
+@ini_set('memory_limit', '256M');
+
 function calCodes($item_date, $last_code) {
     $util = new LotteryUtil();
     $total = LotteryUtil::getTotalCodes();
