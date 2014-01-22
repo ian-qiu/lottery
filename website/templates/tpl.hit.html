@@ -15,8 +15,9 @@ and open the template in the editor.
         <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
         <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" />
         <script type="text/javascript" src="/bootstrap/datepicker/js/bootstrap-datepicker.js"></script>
-        <script type="text/javascript" src="/zeroclipboard-1.2.3/ZeroClipboard.js"></script>
+<!--        <script type="text/javascript" src="/zeroclipboard-1.2.3/ZeroClipboard.js"></script>-->
         <link rel="stylesheet" href="/bootstrap/datepicker/css/datepicker.css" />
+        <script type="text/javascript" src="/jquery.clipboard.js"></script>
         <style type="text/css">
             div#top-query {
                 text-align:center;
@@ -30,7 +31,7 @@ and open the template in the editor.
             $(function () {
                 init_datepicker();
 		bind_query();
-                bind_copy();
+                bind_clipboardV2();
             });
             
             function init_datepicker(){
@@ -49,13 +50,29 @@ and open the template in the editor.
                 });
             }
             
-            function bind_copy(){
+            function bind_clipboardV1(){
                 var clip = new ZeroClipboard( $("#next-issue-btn"), {
                     moviePath: "/zeroclipboard-1.2.3/ZeroClipboard.swf"
                 });
                 clip.on( 'dataRequested', function ( client, args ) {
                     clip.setText( $("#next-codes").val() );
                 });
+            }
+            
+            function bind_clipboardV2(){
+                $("#next-issue-btn").clipboard({
+                    path: '/jquery.clipboard.swf',
+
+                    copy: function() {
+                        //var this_sel = $(this);
+
+                        // Hide "Copy" and show "Copied, copy again?" message in link
+                        //this_sel.find('.code-copy-first').hide();
+                        //this_sel.find('.code-copy-done').show();
+
+                        // Return text in closest element (useful when you have multiple boxes that can be copied)
+                        return $("#next-codes").val();
+                    });
             }
         </script>
     </head>
