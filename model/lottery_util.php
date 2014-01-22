@@ -144,4 +144,32 @@ class LotteryUtil{
         }
         return $new_date;
     }
+	
+	public static function calDistribute($arr){
+		$length = count($arr);
+		$count = 0;
+		$ret = array();
+		for($i=0;$i<$length;$i++){
+			if(!isset($last)){
+				$last = $arr[$i];
+			}
+			if($arr[$i] == $last){
+				$count++;
+			}else{
+				$ret[] = array(
+					'value' => $last,
+					'count' => $count,
+				);
+				$count = 1;
+				$last = $arr[$i];
+			}
+			if($i + 1 == $length){
+				$ret[] = array(
+					'value' => $last,
+					'count' => $count,
+				);
+			}
+		}
+		return $ret;
+	}
 }
