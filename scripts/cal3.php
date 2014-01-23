@@ -49,6 +49,7 @@ function calCodes($item_date, $last_code) {
 
 $file = "/tmp/shishicai.txt";
 $line_count = 0;
+$cal_count = 100000;
 $handle = fopen($file, 'r');
 $line = trim(fgets($handle, 4096));
 list($item_date, $item_code) = preg_split('/\s+/', $line);
@@ -64,7 +65,7 @@ while (true) {
     }
     $item_code = $last_item_code;
     $item_date = $last_item_date;
-    if($line_count++ == 20000){
+    if($line_count++ == 100000){
         break;
     }
     if (feof($handle)) {
