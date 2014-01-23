@@ -49,7 +49,7 @@ function calCodes($item_date, $last_code) {
 
 $file = "/tmp/shishicai.txt";
 $line_count = 0;
-$cal_count = 100000;
+$cal_count = 150000;
 $handle = fopen($file, 'r');
 $line = trim(fgets($handle, 4096));
 list($item_date, $item_code) = preg_split('/\s+/', $line);
