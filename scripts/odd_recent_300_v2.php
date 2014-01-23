@@ -24,7 +24,7 @@ for($i=0;$i<10;$i++){
 
 $util = new LotteryUtil();
 $db = new LotteryDBHelper();
-$sql = "select * from shishicai where item_date > '2011001-023' order by item_date desc;";
+$sql = "select * from shishicai where item_date > '20140123-001' order by item_date desc;";
 $data = $db->getAll($sql);
 
 foreach ($data as $tmp){
