@@ -153,7 +153,7 @@ class PageController extends BaseController{
                 $ret[] = array(
                     'name' => $last === 0 ? 'miss' : 'hit',
                     'y' => $count,
-                    'color' => $last === 0 ? 'red' : 'blue',
+                    'color' => $last === 0 ? 'red' : 'green',
                 );
                 $count = 1;
             }
