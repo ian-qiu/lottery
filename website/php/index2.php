@@ -10,7 +10,7 @@ class PageController extends BaseController{
     public function index(){
         $start_date = $this->getParam("start_date",  date("Ymd"));
         $this->output['start_date'] = $start_date;
-        $sql = "select item_date,item_code from shishicai where item_date < '$start_date-049' order by item_date desc limit 121";
+        $sql = "select item_date,item_code from shishicai where item_date < '$start_date-121' order by item_date desc limit 49";
         $db = new LotteryDBHelper();
         $data = $db->getAll($sql);
         $next_issue = LotteryUtil::getNextIssue($data[0]['item_date']);
